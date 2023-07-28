@@ -30,5 +30,5 @@ playback_speed = 3.0
 playback/speed = 3.0
 
 [connection signal="child_entered_tree" from="CollisionShape2D" to="." method="_on_CollisionShape2D_child_entered_tree"]
-[connection signal="tween_completed" from="GoUpTween" to="." method="_on_Tween_tween_completed"]
 [connection signal="tween_completed" from="GoUpTween" to="." method="_on_GoUpTween_tween_completed"]
+[connection signal="tween_completed" from="GoUpTween" to="." method="_on_Tween_tween_completed"]
