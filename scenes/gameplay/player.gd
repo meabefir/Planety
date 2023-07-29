@@ -74,13 +74,12 @@ func _process(delta: float) -> void:
 	m_planet.m_currentAngle -= deg2rad(m_velocity.x / 20 * delta)
 	
 	var region_rect = Rect2(0, 0, 40, 110)
-	
-	print(get_node("Sprite").get_rect())
 	if spawnHalfPlayer:
 		get_node("Sprite").region_enabled = true
 		get_node("Sprite").region_rect = region_rect
-	if (spawnHalfPlayer == false):
-		get_node("Sprite").region_rect = Rect2(0, 0, 80, 110)
+		
+#	if (spawnHalfPlayer == false):
+#		get_node("Sprite").region_rect = Rect2(0, 0, 80, 110)
 	
 func jump():
 	m_velocity.y = JUMP_FORCE

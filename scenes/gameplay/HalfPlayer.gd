@@ -34,11 +34,10 @@ func _ready() -> void:
 	m_currentAngle = -PI / 2
 	m_horizontalVelocity = 100
 	
-
 func _process(delta: float) -> void:
 	updateDirToPlayer(delta)
 	timer += 2 * delta
-	if timer < 1:
+	if timer < 0.5:
 		shootAction()
 
 func shootAction():
@@ -61,4 +60,5 @@ func updateDirToPlayer(delta:float):
 	return dir_this_frame
 	
 func _on_Area2D_area_entered(area: Area2D) -> void:
-	Globals.getSingle("player").spawnHalfPlayer = false
+	#Globals.getSingle("player").spawnHalfPlayer = false
+	queue_free()
