@@ -14,6 +14,7 @@ onready var bulletScene = preload("res://scenes/gameplay/bullet.tscn")
 onready var m_healthBar: TextureProgress = $"%health_bar"
 
 var m_velocity: Vector2 = Vector2.ZERO	
+export var health: float = 50
 
 var m_currentHp = MAX_HP setget setHp
 

@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://bottle.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Area2D
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta: float) -> void:
+#	pass
+
+func _on_Potion_body_entered(body: Node) -> void:
+	print(\"Hello\")
+	# Replace with function body.
+"
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 175.0
+
+[node name="Potion" type="Area2D"]
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_Potion_body_entered"]

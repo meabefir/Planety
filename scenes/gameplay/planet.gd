@@ -9,6 +9,7 @@ export var radius: float = 100
 var timer = 0.0 
 var m_currentAngle = 0 
 
+
 onready var circumference = 2 * PI * radius
 onready var potionScene  = preload("res://scenes/gameplay/Potion.tscn")
 
@@ -21,13 +22,21 @@ func angleToArc(a):
 func arcToAngle(a):
 	return (a / circumference) * 2 * PI
 	
+var spawn_timer = Timer.new()
+onready var potionScene  = preload("res://scenes/gameplay/Potion.tscn")
+var timer = 0.0  
+
 func _ready() -> void:
-	pass
+	var potion = potionScene.instance()
+	potion.startPos = Vector2.ZERO + Vector2(0, -1.5*radius)
+	add_child(potion)
 	
 func _process(delta: float) -> void:
 	rotation_degrees = rad2deg(m_currentAngle)
 #	spawnPotions(delta)
 	
+	pass
+
 func spawnPotions(delta: float):
 	var potion = potionScene.instance()
 	timer += delta
