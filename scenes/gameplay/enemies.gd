@@ -4,7 +4,7 @@ onready var m_enemyScene = preload("res://scenes/gameplay/enemy.tscn")
 
 func _ready():
 #	return
-	for i in range (0, 3):
+	for i in range (0, 5):
 		spawnEnemy()
 	
 func spawnEnemy():
@@ -15,4 +15,4 @@ func spawnEnemy():
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("test"):
-		pass
+		spawnEnemy()

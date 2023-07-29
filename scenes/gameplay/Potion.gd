@@ -2,7 +2,6 @@ extends PlanetOrbiter
 
 const START_VELOCITY = 300
 
-
 func _ready() -> void: 
 	visible = true
 	m_planet = Globals.getSingle("planet")

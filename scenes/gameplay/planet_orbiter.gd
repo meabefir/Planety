@@ -21,9 +21,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# move on x
-	var planet_circumference = m_planet.radius * 2 * PI
+	var trejectory_circumference = (m_planet.radius + m_height) * 2 * PI
 	var horizontal_movement = m_horizontalVelocity * delta
-	var circ_perc = abs(horizontal_movement / planet_circumference)
+	var circ_perc = abs(horizontal_movement / trejectory_circumference)
 	m_currentAngle += sign(m_horizontalVelocity) * circ_perc * 2 * PI
 	
 	m_height += m_verticalVelocity * delta
