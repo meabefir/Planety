@@ -3,7 +3,7 @@ extends PlanetOrbiter
 const TOP_SPEED = 1400.0
 const BASE_SPEED = 250.0
 const ACC = 25.0
-const DEC = 35.0
+const DEC = 70.0
 const JUMP_FORCE = 800.0
 const G = 20.0
 
@@ -29,6 +29,7 @@ func die():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print("ready player")
 	m_planet = Globals.getSingle("planet")
 	
 	m_currentAngle = -PI / 2
@@ -51,7 +52,7 @@ func _process(delta: float) -> void:
 			jump()
 	
 	if vec_input.x != 0:
-		if vec_input.x == m_velocity.x:
+		if sign(vec_input.x) == sign(m_velocity.x):
 			m_velocity.x = move_toward(m_velocity.x, vec_input.x * TOP_SPEED, ACC)
 		else:
 			m_velocity.x = move_toward(m_velocity.x, vec_input.x * TOP_SPEED, DEC)
@@ -81,4 +82,6 @@ func shootAction():
 	var new_bullet = bulletScene.instance()
 	new_bullet.m_currentAngle = m_currentAngle
 	new_bullet.m_dir = _dir
+	new_bullet.m_planet = Globals.getSingle("planet")
+	new_bullet.m_height = 40
 	Globals.getSingle("projectiles").add_child(new_bullet)

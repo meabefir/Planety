@@ -13,7 +13,11 @@ var m_currentAngle = 0
 var m_keepOnGround = true
 
 func _ready() -> void:
-	pass # Replace with function body.
+	m_planet = Globals.getSingle("planet")
+	
+	var real_angle = m_planet.m_currentAngle + m_currentAngle
+	global_rotation_degrees = rad2deg(real_angle + PI / 2)
+	global_position = m_planet.global_position + Vector2(cos(real_angle), sin(real_angle)) * (m_planet.radius + m_height)
 
 func _process(delta: float) -> void:
 	# move on x

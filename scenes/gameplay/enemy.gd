@@ -17,7 +17,6 @@ var pushAreaTimer
 
 func _ready():
 	pass
-	m_currentAngle = rand_range(0, 2 * PI)
 
 	pushAreaTimer = Timer.new()
 	pushAreaTimer.wait_time = .5
