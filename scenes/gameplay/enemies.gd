@@ -3,8 +3,7 @@ extends Node2D
 onready var m_enemyScene = preload("res://scenes/gameplay/enemy.tscn")
 
 func _ready():
-#	return
-	for i in range (0, 111):
+	for i in range (0, 10):
 		spawnEnemy()
 	
 func spawnEnemy():

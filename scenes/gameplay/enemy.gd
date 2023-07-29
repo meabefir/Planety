@@ -6,7 +6,7 @@ const PUSH_FORCE = 150
 
 var bullet_hit = false
 
-export var enemyHealth: float = 50
+export var health: float = 50
 
 var m_velocity = Vector2.ZERO
 

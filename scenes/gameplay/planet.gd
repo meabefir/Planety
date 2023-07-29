@@ -9,9 +9,9 @@ export var radius: float = 100
 var timer = 0.0 
 var m_currentAngle = 0 
 
-
 onready var circumference = 2 * PI * radius
 onready var potionScene  = preload("res://scenes/gameplay/Potion.tscn")
+
 
 func distanceBetweenAngles(a1, a2):
 	return Ranges.circShortestDist(a1, a2) / (2 * PI) * circumference
