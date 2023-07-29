@@ -1,8 +1,8 @@
 extends PlanetOrbiter
 
-const SPEED = 250
+const SPEED = 350
 const JUMP_FORCE = 800
-const G = 15
+const G = 20
 
 onready var bulletScene = preload("res://scenes/gameplay/bullet.tscn")
 
@@ -24,10 +24,9 @@ func _input(event: InputEvent) -> void:
 			return
 		
 		var new_bullet = bulletScene.instance()
-		Globals.getSingle("projectiles").add_child(new_bullet)
-		
 		new_bullet.m_currentAngle = m_currentAngle
 		new_bullet.m_dir = _dir
+		Globals.getSingle("projectiles").add_child(new_bullet)
 
 func _process(delta: float) -> void:
 	var vec_input = Vector2.ZERO

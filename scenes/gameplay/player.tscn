@@ -3,9 +3,12 @@
 [ext_resource path="res://scenes/gameplay/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/kenney_platformer-characters/PNG/Adventurer/Poses/adventurer_idle.png" type="Texture" id=2]
 
+<<<<<<< HEAD
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 57.0
 
+=======
+>>>>>>> 71e936ff6d6fbb5a85c69c2c44f6da5fefaa4904
 [node name="player" type="Node2D"]
 script = ExtResource( 1 )
 
