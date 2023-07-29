@@ -21,7 +21,7 @@ var m_lastHorizontalDir = 1
 var m_currentHp = MAX_HP setget setHp
 
 
-var spawnHalfPlayer = false
+export var spawnHalfPlayer = false
 
 func setHp(val):
 	m_currentHp = max(0, min(MAX_HP, val))
@@ -48,6 +48,7 @@ func _input(event: InputEvent) -> void:
 		self.m_currentHp -= 10
 
 func _process(delta: float) -> void:
+#	print(spawnHalfPlayer)
 	var vec_input = Vector2.ZERO
 	if Input.is_action_pressed("left"):
 		vec_input.x -= 1

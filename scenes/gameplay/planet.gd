@@ -25,7 +25,9 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	rotation_degrees = rad2deg(m_currentAngle)
-	
+	if Globals.getSingle("player").spawnHalfPlayer:
+		if get_tree().get_nodes_in_group("halfPlayer").size() <1:
+			spawnHalfPlayer()
 #	spawnPotions(delta)
 
 func getCircumference(height_offset = 0):
@@ -36,16 +38,13 @@ func spawnPotions(delta: float):
 	if timer >= 1:
 		addPotion()
 	
-	if Globals.getSingle("player").spawnHalfPlayer:
-		if get_tree().get_nodes_in_group("halfPlayer").size() < 1:
-			spawnHalfPlayer()
+	
 		
 func spawnHalfPlayer():
 	var halfPlayer = halfPlayerScene.instance()
 	if halfPlayer.global_transform.origin.x > Globals.getSingle("player").global_transform.origin.x:
 		halfPlayer.scale.x = -1
 	add_child(halfPlayer)
-	
 
 func addPotion():
 	var potion = potionScene.instance()
