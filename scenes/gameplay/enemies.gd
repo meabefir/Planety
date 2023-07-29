@@ -1,9 +1,9 @@
 extends Node2D
 
 onready var m_enemyScene = preload("res://scenes/gameplay/enemy.tscn")
+export var health: float = 50
 
 func _ready():
-#	return
 	for i in range (0, 5):
 		spawnEnemy()
 	
