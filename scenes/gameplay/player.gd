@@ -48,6 +48,7 @@ func _process(delta: float) -> void:
 		vec_input.x -= 1
 	if Input.is_action_pressed("right"):
 		vec_input.x += 1
+		
 	if Input.is_action_pressed("spawn"):
 		spawnHalfPlayer = true
 		

@@ -35,13 +35,13 @@ func spawnPotions(delta: float):
 	
 	if Globals.getSingle("player").spawnHalfPlayer:
 		spawnHalfPlayer()
-		Globals.getSingle("player").spawnHalfPlayer = false
 		
 func spawnHalfPlayer():
 	var halfPlayer = halfPlayerScene.instance()
-	if halfPlayer.global_transform.origin.x < Globals.getSingle("player").global_transform.origin.x:
+	if halfPlayer.global_transform.origin.x > Globals.getSingle("player").global_transform.origin.x:
 		halfPlayer.scale.x = -1
 	add_child(halfPlayer)
+	Globals.getSingle("player").spawnHalfPlayer = false
 
 func addPotion():
 	var potion = potionScene.instance()

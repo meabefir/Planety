@@ -29,7 +29,6 @@ func die():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("new half player")
 	m_planet = Globals.getSingle("planet")
 	m_currentAngle = -PI / 2
 
