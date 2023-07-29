@@ -18,6 +18,8 @@ export var health: float = 50
 
 var m_currentHp = MAX_HP setget setHp
 
+var spawnHalfPlayer = false
+
 func setHp(val):
 	m_currentHp = max(0, min(MAX_HP, val))
 	m_healthBar.value = (m_currentHp / MAX_HP) * (m_healthBar.max_value - m_healthBar.min_value)
@@ -46,7 +48,9 @@ func _process(delta: float) -> void:
 		vec_input.x -= 1
 	if Input.is_action_pressed("right"):
 		vec_input.x += 1
-	
+	if Input.is_action_pressed("spawn"):
+		spawnHalfPlayer = true
+		
 	if Input.is_action_pressed("jump"):
 		if m_height == 0:
 			jump()

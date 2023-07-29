@@ -29,41 +29,13 @@ func die():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("ready player")
+	print("new half player")
 	m_planet = Globals.getSingle("planet")
-	
 	m_currentAngle = -PI / 2
 
 func _process(delta: float) -> void:
 	shootAction()
-	if Input.is_action_pressed("spawn"):
-		print("spawn")
 	
-	if Input.is_action_pressed("jump"):
-		if m_height == 0:
-			jump()
-	
-	if vec_input.x != 0:
-		if sign(vec_input.x) == sign(m_velocity.x):
-			m_velocity.x = move_toward(m_velocity.x, vec_input.x * TOP_SPEED, ACC)
-		else:
-			m_velocity.x = move_toward(m_velocity.x, vec_input.x * TOP_SPEED, DEC)
-	else:
-		m_velocity.x = move_toward(m_velocity.x, 0, DEC)
-	
-	m_horizontalVelocity = m_velocity.x
-	m_verticalVelocity = m_velocity.y
-	
-	if m_height > 0:
-		m_velocity.y -= G
-	elif m_height < 0:
-		m_velocity.y = 0
-	
-	m_planet.m_currentAngle -= deg2rad(m_velocity.x / 20 * delta)
-	
-func jump():
-	m_velocity.y = JUMP_FORCE
-
 func shootAction():
 	if m_height != 0:
 		return
@@ -73,7 +45,7 @@ func shootAction():
 	
 	var new_bullet = bulletScene.instance()
 	new_bullet.m_currentAngle = m_currentAngle
-	new_bullet.m_dir = _dir
+	new_bullet.m_dir = -_dir
 	new_bullet.m_planet = Globals.getSingle("planet")
 	new_bullet.m_height = 40
 	Globals.getSingle("projectiles").add_child(new_bullet)
