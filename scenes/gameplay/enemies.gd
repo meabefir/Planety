@@ -1,11 +1,10 @@
 extends Node2D
 
+onready var m_enemyScene = preload("res://scenes/gameplay/enemy.tscn")
+
 func _ready():
-	var scene = load("res://scenes/gameplay/enemy.tscn") 
-	return
-	for i in range (0, 5):
-		var enemy = scene.instance()
+#	return
+	for i in range (0, 100):
+		var enemy = m_enemyScene.instance()
 		add_child(enemy)
-		print ('sdadsa')
 		enemy.m_planet = get_parent()
-	

@@ -17,6 +17,7 @@ texture = ExtResource( 1 )
 [node name="player" parent="planet" groups=["player"] instance=ExtResource( 3 )]
 
 [node name="projectiles" type="Node2D" parent="planet" groups=["projectiles"]]
+
 [node name="enemies" type="Node2D" parent="planet"]
 script = ExtResource( 4 )
 
