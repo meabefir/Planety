@@ -22,9 +22,7 @@ func angleToArc(a):
 func arcToAngle(a):
 	return (a / circumference) * 2 * PI
 	
-var spawn_timer = Timer.new()
-onready var potionScene  = preload("res://scenes/gameplay/Potion.tscn")
-var timer = 0.0  
+	spawn_timer = Timer.new()
 
 func _ready() -> void:
 	var potion = potionScene.instance()

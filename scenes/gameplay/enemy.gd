@@ -5,9 +5,8 @@ const MIN_PUSH_FORCE = 70
 const PUSH_FORCE = 150
 
 var bullet_hit = false
-<<<<<<< HEAD
+
 export var enemyHealth: float = 50
-=======
 
 var m_velocity = Vector2.ZERO
 
@@ -16,7 +15,6 @@ onready var pushArea: Area2D = $"push_area"
 
 var pushAreaTimer
 
->>>>>>> 71e936ff6d6fbb5a85c69c2c44f6da5fefaa4904
 func _ready():
 	pass
 	m_currentAngle = rand_range(0, 2 * PI)
