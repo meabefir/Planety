@@ -6,8 +6,6 @@ const PUSH_FORCE = 150
 
 var bullet_hit = false
 
-export var health: float = 50
-
 var m_velocity = Vector2.ZERO
 
 onready var m_player = Globals.getSingle("player")

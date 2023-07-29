@@ -20,9 +20,10 @@ func _on_GoDownTween_tween_all_completed() -> void:
 
 func _on_BottleShape_area_entered(area: Area2D) -> void:
 	queue_free()
+	
 	var player = Globals.getSingle("player")
 	player.health += 10
 	
-#	var enemies = get_tree().get_nodes_in_group("enemies")
-#	print(get_tree().get_nodes_in_group("enemies").size())
-#	
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	for enemy in enemies:
+		enemy.health += 10
