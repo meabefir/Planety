@@ -1,7 +1,7 @@
 extends PlanetOrbiter
 
 var bullet_hit = false
-
+export var enemyHealth: float = 50
 func _ready():
 	pass
 	

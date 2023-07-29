@@ -7,6 +7,7 @@ const G = 15
 onready var bulletScene = preload("res://scenes/gameplay/bullet.tscn")
 
 var m_velocity: Vector2 = Vector2.ZERO	
+export var health: float = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
