@@ -26,8 +26,9 @@ func _process(delta: float) -> void:
 	if m_keepOnGround and m_height < 0:
 		m_height = 0
 	
-	global_rotation_degrees = rad2deg(m_currentAngle + PI / 2)
-	global_position = m_planet.global_position + Vector2(cos(m_currentAngle), sin(m_currentAngle)) * (m_planet.radius + m_height)
+	var real_angle = m_planet.m_currentAngle + m_currentAngle
+	global_rotation_degrees = rad2deg(real_angle + PI / 2)
+	global_position = m_planet.global_position + Vector2(cos(real_angle), sin(real_angle)) * (m_planet.radius + m_height)
 
 func isBelowGround():
 	pass
