@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://player.gd" type="Script" id=1]
+[ext_resource path="res://scenes/gameplay/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/kenney_platformer-characters/PNG/Adventurer/Poses/adventurer_idle.png" type="Texture" id=2]
 
 [node name="player" type="Node2D"]

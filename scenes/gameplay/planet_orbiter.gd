@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	var circ_perc = abs(horizontal_movement / planet_circumference)
 	m_currentAngle += sign(m_horizontalVelocity) * circ_perc * 2 * PI
 	
-	m_height += m_verticalVelocity
+	m_height += m_verticalVelocity * delta
 	if m_keepOnGround and m_height < 0:
 		m_height = 0
 	
