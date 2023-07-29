@@ -2,8 +2,6 @@ extends Node2D
 
 class_name Planet
 
-var spawn_timer = Timer.new()
-
 onready var sprite = get_node("Sprite")
 export var radius: float = 100
 var timer = 0.0 
@@ -22,8 +20,6 @@ func angleToArc(a):
 func arcToAngle(a):
 	return (a / circumference) * 2 * PI
 	
-	spawn_timer = Timer.new()
-
 func _ready() -> void:
 	pass
 	
