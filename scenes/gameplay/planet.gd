@@ -25,20 +25,20 @@ func arcToAngle(a):
 	spawn_timer = Timer.new()
 
 func _ready() -> void:
-	var potion = potionScene.instance()
-	potion.startPos = Vector2.ZERO + Vector2(0, -1.5*radius)
-	add_child(potion)
+	pass
 	
 func _process(delta: float) -> void:
 	rotation_degrees = rad2deg(m_currentAngle)
-#	spawnPotions(delta)
 	
-	pass
+	spawnPotions(delta)
 
 func spawnPotions(delta: float):
-	var potion = potionScene.instance()
 	timer += delta
-	if timer >= 3:
-		potion.startPos = Vector2.ZERO + Vector2(0, -1.5*radius)
-		add_child(potion)
-		timer = 0.0 
+	if timer >= 1:
+		addPotion()
+		
+func addPotion():
+	var potion = potionScene.instance()
+	potion.m_currentAngle = rand_range(0, 2 * PI)
+	add_child(potion)
+	timer = 0.0 

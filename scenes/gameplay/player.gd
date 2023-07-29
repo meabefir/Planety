@@ -36,11 +36,6 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		shootAction()
 	
-	if Input.is_action_pressed("jump"):
-		if m_height == 0:
-			jump()
-			return
-	
 	if Input.is_action_just_pressed("test"):
 		self.m_currentHp -= 10
 
@@ -50,6 +45,10 @@ func _process(delta: float) -> void:
 		vec_input.x -= 1
 	if Input.is_action_pressed("right"):
 		vec_input.x += 1
+	
+	if Input.is_action_pressed("jump"):
+		if m_height == 0:
+			jump()
 	
 	if vec_input.x != 0:
 		if vec_input.x == m_velocity.x:

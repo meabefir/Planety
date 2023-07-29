@@ -28,7 +28,6 @@ frames = SubResource( 1 )
 animation = "walk"
 
 [node name="hurtbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 0
 
