@@ -1,22 +1,25 @@
 extends PlanetOrbiter
 
-const TOP_SPEED = 1400.0
+const TOP_SPEED = 350.0
 const BASE_SPEED = 250.0
 const ACC = 25.0
 const DEC = 70.0
 const JUMP_FORCE = 800.0
 const G = 20.0
+const EARTH_SPIN_VELOCITY = 500
 
 const MAX_HP = 200.0
 
 onready var bulletScene = preload("res://scenes/gameplay/bullet.tscn")
 
 onready var m_healthBar: TextureProgress = $"%health_bar"
+onready var m_hurtBox = $"%hurt_box"
 
 var m_velocity: Vector2 = Vector2.ZERO	
-export var health: float = 50
+var m_lastHorizontalDir = 1
 
 var m_currentHp = MAX_HP setget setHp
+
 
 var spawnHalfPlayer = false
 
@@ -27,14 +30,16 @@ func setHp(val):
 		die()
 
 func die():
-	pass
+	queue_free()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("ready player")
 	m_planet = Globals.getSingle("planet")
 	
 	m_currentAngle = -PI / 2
+	
+	m_hurtBox.connect("hurt", self, "hurt")
+	
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		shootAction()
@@ -56,6 +61,8 @@ func _process(delta: float) -> void:
 		if m_height == 0:
 			jump()
 	
+	if m_velocity.x != 0:
+		m_lastHorizontalDir = sign(m_velocity.x)
 	if vec_input.x != 0:
 		if sign(vec_input.x) == sign(m_velocity.x):
 			m_velocity.x = move_toward(m_velocity.x, vec_input.x * TOP_SPEED, ACC)
@@ -71,7 +78,9 @@ func _process(delta: float) -> void:
 		m_velocity.y -= G
 	elif m_height < 0:
 		m_velocity.y = 0
-	m_planet.m_currentAngle -= deg2rad(m_velocity.x / 20 * delta)
+	
+	if abs(m_velocity.x) > EARTH_SPIN_VELOCITY:
+		m_planet.m_currentAngle -= deg2rad(m_velocity.x / 20 * delta)
 	
 	var region_rect = Rect2(0, 0, 40, 110)
 	if spawnHalfPlayer:
@@ -89,11 +98,15 @@ func shootAction():
 		return
 	var _dir = sign(m_velocity.x)
 	if _dir == 0:
-		return
+		_dir = m_lastHorizontalDir
 	
 	var new_bullet = bulletScene.instance()
-	new_bullet.m_currentAngle = m_currentAngle
+	new_bullet.m_currentAngle = m_currentAngle + m_planet.arcToAngle(60 * sign(m_horizontalVelocity), 40)
+	
 	new_bullet.m_dir = _dir
 	new_bullet.m_planet = Globals.getSingle("planet")
 	new_bullet.m_height = 40
 	Globals.getSingle("projectiles").add_child(new_bullet)
+	
+func hurt(data):
+	self.m_currentHp -= data["damage"]

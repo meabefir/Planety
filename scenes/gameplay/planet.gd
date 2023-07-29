@@ -14,11 +14,11 @@ onready var halfPlayerScene = preload("res://scenes/gameplay/HalfPlayer.tscn")
 func distanceBetweenAngles(a1, a2):
 	return Ranges.circShortestDist(a1, a2) / (2 * PI) * circumference
 
-func angleToArc(a):
-	return a / (2 * PI) * circumference
+func angleToArc(a, height_offset = 0):
+	return a / (2 * PI) * getCircumference(height_offset)
 	
-func arcToAngle(a):
-	return (a / circumference) * 2 * PI
+func arcToAngle(a, height_offset = 0):
+	return (a / getCircumference(height_offset)) * 2 * PI
 	
 func _ready() -> void:
 	pass
@@ -26,7 +26,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	rotation_degrees = rad2deg(m_currentAngle)
 	
-	spawnPotions(delta)
+#	spawnPotions(delta)
+
+func getCircumference(height_offset = 0):
+	return 2 * PI * (radius + height_offset)
 
 func spawnPotions(delta: float):
 	timer += delta
