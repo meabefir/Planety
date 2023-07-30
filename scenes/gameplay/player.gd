@@ -22,7 +22,8 @@ var m_lastHorizontalDir = 1
 var m_currentHp = MAX_HP setget setHp
 
 var lastDamageFrom = ""
-var spawnHalfPlayer = false
+
+export var spawnHalfPlayer = false
 
 func setHp(val):
 	m_currentHp = max(0, min(MAX_HP, val))
@@ -51,6 +52,7 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	sprite.flip_h = m_lastHorizontalDir != 1
+
 	var vec_input = Vector2.ZERO
 	if Input.is_action_pressed("left"):
 		vec_input.x -= 1
@@ -86,6 +88,14 @@ func _process(delta: float) -> void:
 		m_planet.m_currentAngle -= deg2rad(m_velocity.x / 20 * delta)
 		
 	m_planet.m_currentAngle = -m_currentAngle - PI / 2
+	
+	var region_rect = Rect2(0, 0, 40, 110)
+	if spawnHalfPlayer:
+		get_node("Sprite").region_enabled = true
+		get_node("Sprite").region_rect = region_rect
+		
+#	if (spawnHalfPlayer == false):
+#		get_node("Sprite").region_rect = Rect2(0, 0, 80, 110)
 	
 func jump():
 	m_velocity.y = JUMP_FORCE
