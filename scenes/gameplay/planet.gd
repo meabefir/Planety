@@ -2,11 +2,7 @@ extends Node2D
 
 class_name Planet
 
-<<<<<<< Updated upstream
-=======
-onready var sprite = get_node("sprite")
-onready var potionSprite = get_node("Potion")
->>>>>>> Stashed changes
+#onready var potionSprite = get_node("Potion")
 export var radius: float = 100
 var timer = 0.0 
 var m_currentAngle = 0 

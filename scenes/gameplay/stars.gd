@@ -1,6 +1,6 @@
 extends Sprite
 
-export var spin_speed: float = 2.5
+export var spin_speed: float = 5.5
 var current_rotation: float = 0.0
 
 func _process(delta: float) -> void:

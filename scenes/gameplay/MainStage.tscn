@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=25 format=2]
-=======
-[gd_scene load_steps=12 format=2]
->>>>>>> Stashed changes
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://assets/kenney_planets/Planets/planet09.png" type="Texture" id=1]
 [ext_resource path="res://scenes/gameplay/planet.gd" type="Script" id=2]
@@ -13,24 +9,118 @@
 [ext_resource path="res://assets/fonts/ArialMedium.tres" type="DynamicFont" id=7]
 [ext_resource path="res://scenes/ui/ui.gd" type="Script" id=8]
 [ext_resource path="res://scenes/ui/death_ui.gd" type="Script" id=9]
-<<<<<<< Updated upstream
 [ext_resource path="res://assets/backgr/background/Blue Nebula/Blue_Nebula_01-1024x1024.png" type="Texture" id=10]
 [ext_resource path="res://scenes/gameplay/background.gd" type="Script" id=11]
 [ext_resource path="res://assets/backgr/particles/star_07.png" type="Texture" id=12]
 [ext_resource path="res://assets/backgr/particles/BasicParticle.png" type="Texture" id=13]
 [ext_resource path="res://scenes/gameplay/stars.gd" type="Script" id=15]
 
+[sub_resource type="StreamTexture" id=19]
+flags = 4
+load_path = "res://.import/star_07.png-33f40c8a4ad84ecd8e8d0faf71698fb1.stex"
+
+[sub_resource type="CanvasItemMaterial" id=20]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=21]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0, 0.136054, 0.346939, 0.52381, 0.680272, 0.870748, 1 )
+colors = PoolColorArray( 0.0901961, 0.0901961, 0.0901961, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0.458008, 0.865227, 0.875, 1, 1, 1, 1, 1, 0.756872, 0.917266, 0.936035, 0.815686, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=22]
+resource_local_to_scene = true
+gradient = SubResource( 21 )
+width = 100
+
+[sub_resource type="ParticlesMaterial" id=23]
+resource_local_to_scene = true
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 1.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 33.2
+angle_random = 1.0
+color_ramp = SubResource( 22 )
+
+[sub_resource type="StreamTexture" id=24]
+flags = 4
+load_path = "res://.import/BasicParticle.png-ca31a9da88516931427595023b871772.stex"
+
+[sub_resource type="StreamTexture" id=6]
+flags = 4
+load_path = "res://.import/star_07.png-33f40c8a4ad84ecd8e8d0faf71698fb1.stex"
+
+[sub_resource type="CanvasItemMaterial" id=7]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=8]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0, 0.136054, 0.346939, 0.52381, 0.680272, 0.870748, 1 )
+colors = PoolColorArray( 0.0901961, 0.0901961, 0.0901961, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.0507813, 0.184265, 1, 1, 1, 1, 1, 0.756872, 0.917266, 0.936035, 0.815686, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=9]
+resource_local_to_scene = true
+gradient = SubResource( 8 )
+width = 100
+
+[sub_resource type="ParticlesMaterial" id=10]
+resource_local_to_scene = true
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 1.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 33.2
+angle_random = 1.0
+color_ramp = SubResource( 9 )
+
+[sub_resource type="StreamTexture" id=11]
+flags = 4
+load_path = "res://.import/BasicParticle.png-ca31a9da88516931427595023b871772.stex"
+
+[sub_resource type="CanvasItemMaterial" id=14]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=15]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0, 0.136054, 0.346939, 0.52381, 0.680272, 0.870748, 1 )
+colors = PoolColorArray( 0.0901961, 0.0901961, 0.0901961, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0.213928, 1, 0.0507813, 1, 1, 1, 1, 1, 0.756872, 0.917266, 0.936035, 0.815686, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=16]
+resource_local_to_scene = true
+gradient = SubResource( 15 )
+width = 100
+
+[sub_resource type="ParticlesMaterial" id=17]
+resource_local_to_scene = true
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 1.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 33.2
+angle_random = 1.0
+color_ramp = SubResource( 16 )
+
+[sub_resource type="StreamTexture" id=18]
+flags = 4
+load_path = "res://.import/BasicParticle.png-ca31a9da88516931427595023b871772.stex"
+
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=25]
 resource_local_to_scene = true
-offsets = PoolRealArray( 0, 0.231293, 0.585034, 0.870748, 1 )
-colors = PoolColorArray( 0.0901961, 0.0901961, 0.0901961, 0, 1, 1, 1, 1, 0.910156, 0.0675507, 0.0675507, 1, 0.756872, 0.917266, 0.936035, 0.815686, 1, 1, 1, 0 )
+offsets = PoolRealArray( 0, 0.136054, 0.346939, 0.52381, 0.680272, 0.870748, 1 )
+colors = PoolColorArray( 0.0901961, 0.0901961, 0.0901961, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.756872, 0.917266, 0.936035, 0.815686, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=5]
+[sub_resource type="GradientTexture" id=26]
 resource_local_to_scene = true
-gradient = SubResource( 4 )
+gradient = SubResource( 25 )
 width = 100
 
 [sub_resource type="ParticlesMaterial" id=3]
@@ -43,22 +133,22 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 33.2
 angle_random = 1.0
-color_ramp = SubResource( 5 )
+color_ramp = SubResource( 26 )
 
-[sub_resource type="CanvasItemMaterial" id=6]
+[sub_resource type="CanvasItemMaterial" id=27]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=28]
 resource_local_to_scene = true
-offsets = PoolRealArray( 0, 0.231293, 0.585034, 0.870748, 1 )
-colors = PoolColorArray( 0.0901961, 0.0901961, 0.0901961, 0, 1, 1, 1, 1, 0.0675507, 0.910156, 0.633676, 1, 0.756872, 0.917266, 0.936035, 0.815686, 1, 1, 1, 0 )
+offsets = PoolRealArray( 0, 0.136054, 0.346939, 0.510204, 0.680272, 0.870748 )
+colors = PoolColorArray( 0.0901961, 0.0901961, 0.0901961, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0.0507813, 0.110107, 1, 1, 0.537628, 0.48999, 0.871094, 1, 0.756872, 0.917266, 0.936035, 0.815686 )
 
-[sub_resource type="GradientTexture" id=8]
+[sub_resource type="GradientTexture" id=29]
 resource_local_to_scene = true
-gradient = SubResource( 7 )
+gradient = SubResource( 28 )
 width = 100
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=30]
 resource_local_to_scene = true
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
@@ -68,14 +158,44 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 33.2
 angle_random = 1.0
-color_ramp = SubResource( 8 )
+color_ramp = SubResource( 29 )
 
-[sub_resource type="StreamTexture" id=10]
+[sub_resource type="StreamTexture" id=31]
 flags = 4
 load_path = "res://.import/BasicParticle.png-ca31a9da88516931427595023b871772.stex"
-=======
-[ext_resource path="res://bottle.png" type="Texture" id=10]
->>>>>>> Stashed changes
+
+[sub_resource type="StreamTexture" id=32]
+flags = 4
+load_path = "res://.import/star_07.png-33f40c8a4ad84ecd8e8d0faf71698fb1.stex"
+
+[sub_resource type="CanvasItemMaterial" id=33]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=34]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0, 0.136054, 0.346939, 0.52381, 0.680272, 0.870748, 1 )
+colors = PoolColorArray( 0.0901961, 0.0901961, 0.0901961, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.815686, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=35]
+resource_local_to_scene = true
+gradient = SubResource( 34 )
+width = 100
+
+[sub_resource type="ParticlesMaterial" id=36]
+resource_local_to_scene = true
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 1.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 33.2
+angle_random = 1.0
+color_ramp = SubResource( 35 )
+
+[sub_resource type="StreamTexture" id=37]
+flags = 4
+load_path = "res://.import/BasicParticle.png-ca31a9da88516931427595023b871772.stex"
 
 [sub_resource type="Animation" id=1]
 resource_name = "die"
@@ -83,7 +203,6 @@ resource_name = "die"
 [node name="MainStage" type="Node2D"]
 script = ExtResource( 5 )
 
-<<<<<<< Updated upstream
 [node name="background" type="Sprite" parent="."]
 scale = Vector2( 3.5, 3.5 )
 texture = ExtResource( 10 )
@@ -93,11 +212,58 @@ script = ExtResource( 11 )
 script = ExtResource( 15 )
 
 [node name="star" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.439216 )
 position = Vector2( 0, -855 )
 scale = Vector2( 0.3, 0.3 )
-texture = ExtResource( 12 )
+texture = SubResource( 19 )
 
 [node name="Particles2D" type="Particles2D" parent="stars/star"]
+material = SubResource( 20 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 23 )
+texture = SubResource( 24 )
+
+[node name="star2" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.262745 )
+position = Vector2( 451, -574 )
+scale = Vector2( 0.1, 0.1 )
+texture = SubResource( 6 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star2"]
+material = SubResource( 7 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 10 )
+texture = SubResource( 11 )
+
+[node name="star3" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.156863 )
+position = Vector2( -677, -477 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 12 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star3"]
+material = SubResource( 14 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 17 )
+texture = SubResource( 18 )
+
+[node name="star4" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.168627 )
+position = Vector2( 857, -252 )
+rotation = -0.226893
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 12 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star4"]
 material = SubResource( 2 )
 position = Vector2( 0, -0.000488281 )
 scale = Vector2( 1.66667, 1.66667 )
@@ -106,31 +272,485 @@ speed_scale = 0.5
 process_material = SubResource( 3 )
 texture = ExtResource( 13 )
 
-[node name="star2" type="Sprite" parent="stars"]
-position = Vector2( 516, -519 )
-scale = Vector2( 0.3, 0.3 )
+[node name="star5" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.27451 )
+position = Vector2( 910, -206 )
+rotation = -0.0523599
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 12 )
 
-[node name="Particles2D" type="Particles2D" parent="stars/star2"]
-material = SubResource( 6 )
+[node name="Particles2D" type="Particles2D" parent="stars/star5"]
+material = SubResource( 2 )
 position = Vector2( 0, -0.000488281 )
 scale = Vector2( 1.66667, 1.66667 )
 amount = 3
 speed_scale = 0.5
-process_material = SubResource( 9 )
-texture = SubResource( 10 )
-=======
-[node name="Potion" type="Label" parent="."]
-margin_bottom = 1000.0
-__meta__ = {
-"_edit_use_anchors_": true
-}
+process_material = SubResource( 3 )
+texture = ExtResource( 13 )
 
-[node name="PotionSprite" type="Sprite" parent="Potion" groups=["potion_ui"]]
-position = Vector2( -700, -900 )
-scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 10 )
->>>>>>> Stashed changes
+[node name="star6" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.188235 )
+position = Vector2( 1129, 479 )
+rotation = 0.45204
+scale = Vector2( 0.13, 0.13 )
+texture = SubResource( 19 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star6"]
+material = SubResource( 20 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 23 )
+texture = SubResource( 24 )
+
+[node name="star7" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.219608 )
+position = Vector2( 388, 692 )
+rotation = -0.45204
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 12 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star7"]
+material = SubResource( 27 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 30 )
+texture = SubResource( 31 )
+
+[node name="star8" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.290196 )
+position = Vector2( -138, 833 )
+rotation = 0.113446
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 6 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star8"]
+material = SubResource( 7 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 10 )
+texture = SubResource( 11 )
+
+[node name="star9" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.180392 )
+position = Vector2( -618, 738 )
+rotation = -0.905826
+scale = Vector2( 0.17, 0.17 )
+texture = ExtResource( 12 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star9"]
+material = SubResource( 2 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 3 )
+texture = ExtResource( 13 )
+
+[node name="star10" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.207843 )
+position = Vector2( -985, 247 )
+rotation = -1.32769
+scale = Vector2( 0.07, 0.07 )
+texture = SubResource( 19 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star10"]
+material = SubResource( 20 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 23 )
+texture = SubResource( 24 )
+
+[node name="star11" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.305882 )
+position = Vector2( -987, 53 )
+rotation = -0.0698132
+scale = Vector2( 0.18, 0.18 )
+texture = SubResource( 19 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star11"]
+material = SubResource( 20 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 23 )
+texture = SubResource( 24 )
+
+[node name="star12" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0862745 )
+position = Vector2( -377, -755 )
+rotation = -0.45204
+scale = Vector2( 0.07, 0.07 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star12"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star13" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0862745 )
+position = Vector2( 659, 180 )
+rotation = -0.45204
+scale = Vector2( 0.07, 0.07 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star13"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star14" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0862745 )
+position = Vector2( 444, 773 )
+rotation = -0.45204
+scale = Vector2( 0.07, 0.07 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star14"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star15" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0862745 )
+position = Vector2( -644, 559 )
+rotation = -0.45204
+scale = Vector2( 0.07, 0.07 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star15"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star16" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0862745 )
+position = Vector2( 41, -807 )
+rotation = -0.45204
+scale = Vector2( 0.07, 0.07 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star16"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star17" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0862745 )
+position = Vector2( 581, -280 )
+rotation = -0.45204
+scale = Vector2( 0.07, 0.07 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star17"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star18" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0862745 )
+position = Vector2( -601, -479 )
+rotation = -0.45204
+scale = Vector2( 0.07, 0.07 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star18"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star19" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0862745 )
+position = Vector2( 250, -718 )
+rotation = -0.45204
+scale = Vector2( 0.07, 0.07 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star19"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star20" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( -229, -755 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star20"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star21" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( -307, 596 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star21"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star22" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( -921, -384 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star22"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star23" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( -866, 487 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star23"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star24" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( 173, 865 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star24"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star25" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( -856, -177 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star25"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star26" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( 736, 22 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star26"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star27" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( 467, -527 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star27"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star28" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( -613, -626 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star28"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star29" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( 278, -667 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star29"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star30" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( -245, 1045 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star30"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star31" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( 708, 553 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star31"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star32" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( -362, -576 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star32"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star33" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( 651, -393 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star33"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
+
+[node name="star34" type="Sprite" parent="stars"]
+modulate = Color( 1, 1, 1, 0.0666667 )
+position = Vector2( -750, 309 )
+rotation = -1.64934
+scale = Vector2( 0.11, 0.11 )
+texture = SubResource( 32 )
+
+[node name="Particles2D" type="Particles2D" parent="stars/star34"]
+material = SubResource( 33 )
+position = Vector2( 0, -0.000488281 )
+scale = Vector2( 1.66667, 1.66667 )
+amount = 3
+speed_scale = 0.5
+process_material = SubResource( 36 )
+texture = SubResource( 37 )
 
 [node name="planet" type="Node2D" parent="." groups=["planet"]]
 script = ExtResource( 2 )

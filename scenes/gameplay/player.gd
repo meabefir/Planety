@@ -71,10 +71,10 @@ func _process(delta: float) -> void:
 			add_child(potion)
 			timer = 0
 			
-	if timer < 5:
-		potion_cooldown.modulate.a = 0.5
-	if timer > 5:
-		potion_cooldown.modulate.a = 1
+#	if timer < 5:
+#		potion_cooldown.modulate.a = 0.5
+#	if timer > 5:
+#		potion_cooldown.modulate.a = 1
 			
 		
 	if Input.is_action_pressed("jump"):
