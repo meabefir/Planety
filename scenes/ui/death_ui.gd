@@ -13,5 +13,9 @@ func updateData(from):
 		text = "Get gunned down"
 	elif from == "guillotine":
 		text = "Even the mighty must bow their head"
+	elif from == "enemy":
+		text = "The most embarrassing death..."
+	elif from == "portal_enemy":
+		text = "Slain by a wizard"
 	
 	messageLabel.text = text

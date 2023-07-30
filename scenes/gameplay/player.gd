@@ -8,7 +8,7 @@ const JUMP_FORCE = 800.0
 const G = 20.0
 const EARTH_SPIN_VELOCITY = 500
 
-const MAX_HP = 200.0
+const MAX_HP = 12200.0
 
 onready var bulletScene = preload("res://scenes/gameplay/bullet.tscn")
 onready var potionScene = preload("res://scenes/gameplay/Potion.tscn")

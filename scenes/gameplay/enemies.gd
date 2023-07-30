@@ -7,10 +7,22 @@ onready var m_enemyScene = preload("res://scenes/gameplay/enemy.tscn")
 onready var m_portalEnemyScene = preload("res://scenes/gameplay/portal_enemy.tscn")
 export var health: float = 35
 
+onready var timer1 = $"%basic_enemy_spawn_timer"
+onready var timer2 = $"%portal_enemy_spawn_timer"
+
+var active = true
+
 func _ready():
 	pass
 	
+func stop():
+	active = false
+	timer1.stop()
+	timer2.stop()
+	
 func spawnEnemy(angle = null, enemy_scene = m_enemyScene):
+	if !active:
+		return
 	var player = Globals.getSingle("player")
 	if !is_instance_valid(player):
 		return

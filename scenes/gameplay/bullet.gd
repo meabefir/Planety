@@ -2,7 +2,7 @@ extends PlanetOrbiter
 
 const LIFE_TIME = 5.5
 const SPEED = 1000.0
-const DAMAGE = 6.66
+const DAMAGE = 7
 
 var m_dir = 1
 export var m_currentSpeed = SPEED
