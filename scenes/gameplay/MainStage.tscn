@@ -204,7 +204,7 @@ resource_name = "die"
 script = ExtResource( 5 )
 
 [node name="background" type="Sprite" parent="."]
-scale = Vector2( 3.5, 3.5 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 10 )
 script = ExtResource( 11 )
 

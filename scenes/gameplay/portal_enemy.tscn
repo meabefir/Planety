@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/gameplay/hurtbox.gd" type="Script" id=1]
 [ext_resource path="res://scenes/gameplay/portal_enemy.gd" type="Script" id=2]
@@ -152,6 +152,8 @@ shader_param/u_progress = 1.0
 [sub_resource type="ExternalTexture" id=19]
 size = Vector2( 20, 20 )
 
+[sub_resource type="CapsuleShape2D" id=24]
+
 [node name="portal_enemy" type="Node2D" groups=["enemy", "portal_enemy"]]
 script = ExtResource( 2 )
 
@@ -208,4 +210,14 @@ offset = Vector2( 0, -115 )
 [node name="Tween" type="Tween" parent="."]
 unique_name_in_owner = true
 
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( 0, -45 )
+rotation = 1.5708
+shape = SubResource( 24 )
+
 [connection signal="area_entered" from="bullet_detector" to="." method="_on_bullet_detector_area_entered"]
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

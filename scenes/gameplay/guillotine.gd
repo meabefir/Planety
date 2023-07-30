@@ -22,6 +22,7 @@ onready var noticeArea: Area2D = $"%notice_area"
 onready var noticeCollision = $"%notice_collision"
 onready var hitBox = $"%hit_box"
 onready var hitboxCollision = $"%hitbox_collision"
+onready var healthBar = $"%hp"
 
 var currentState = GUILLOTINE_STATE.SPAWNING setget setState
 

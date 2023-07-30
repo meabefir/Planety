@@ -1,8 +1,44 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/textures/axe.png" type="Texture" id=1]
 [ext_resource path="res://scenes/gameplay/guillotine.gd" type="Script" id=2]
 [ext_resource path="res://assets/textures/warning.png" type="Texture" id=3]
+
+[sub_resource type="Shader" id=9]
+code = "// NOTE: Shader automatically converted from Godot Engine 3.5.2.stable's CanvasItemMaterial.
+
+shader_type canvas_item;
+render_mode blend_mix;
+
+const float PI = 3.141592653;
+
+uniform float u_lifePerc = .5;
+
+void fragment() {
+	vec4 col = vec4(1.);
+	vec2 uv = UV;
+	uv -= vec2(.5,.5);
+	float dist = length(uv);
+	if (dist < .4 || dist > .5) {
+		col.a = 0.;
+	}
+	
+	float angle = atan(uv.y, uv.x);
+	angle  = 1. - angle / PI;
+	float angle_perc = angle / (2. * PI);
+	if (angle_perc > 1. - u_lifePerc) {
+		col.a = 0.;
+	}
+	 
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
+shader_param/u_lifePerc = 0.688
+
+[sub_resource type="ExternalTexture" id=8]
+size = Vector2( 170, 170 )
 
 [sub_resource type="Shader" id=4]
 code = "// NOTE: Shader automatically converted from Godot Engine 3.5.2.stable's CanvasItemMaterial.
@@ -132,6 +168,12 @@ m_height = -510.0
 
 [node name="handle" type="Node2D" parent="pivot"]
 rotation = 0.785398
+
+[node name="hp" type="Sprite" parent="pivot/handle"]
+unique_name_in_owner = true
+material = SubResource( 10 )
+position = Vector2( 1.41422, -69.2965 )
+texture = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="pivot/handle"]
 position = Vector2( 0, -60 )

@@ -5,13 +5,13 @@ const SPEED = 150
 const MIN_PUSH_FORCE = 70
 const PUSH_FORCE = 150
 const DAMAGE = 5
+const HIT_COOLDOWN = 2
 
 enum ENEMY_STATE {
 	SPAWNING,
 	DEFAULT,
 	DIE
 }
-
 
 var m_velocity = Vector2.ZERO
 
@@ -28,6 +28,9 @@ var currentHp = MAX_HP setget setHp
 var currentState = ENEMY_STATE.SPAWNING setget setState
 
 var spawnProgress = 0.0
+
+var canHit = true
+var hitTimer = 0
 
 func setState(value):
 	var old_state = currentState
@@ -65,7 +68,7 @@ func die():
 
 func tweenCompleted(obj, prop):
 	print(obj, prop)
-	if prop == "updateDeathProgress":
+	if prop == ":updateDeathProgress":
 		queue_free()
 
 func updateDeathProgress(val):
@@ -103,6 +106,12 @@ func _process(delta: float) -> void:
 		
 	sprite.flip_h = sign(m_horizontalVelocity) == -1
 	
+	if !canHit:
+		hitTimer += delta
+		if hitTimer >= HIT_COOLDOWN:
+			canHit = true
+			hitTimer = 0.0
+	
 func updateStateSpawning(delta):
 	spawnProgress += delta
 	spawnProgress = min(1, spawnProgress)
@@ -134,3 +143,12 @@ func updateDirToPlayer():
 	var dir_this_frame = sign(Ranges.circShortestDiff(m_currentAngle, m_player.m_currentAngle, 0, 2 * PI))
 	
 	m_velocity.x += dir_this_frame * SPEED
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if !canHit:
+		return
+	var player = area.get_parent()
+	player.collision({
+		"from": "enemy",
+		"damage": DAMAGE
+	})
