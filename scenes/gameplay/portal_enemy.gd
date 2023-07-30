@@ -1,15 +1,17 @@
 extends PlanetOrbiter
 
-const MAX_HP = 100
-const SPEED = 100
-const MIN_PUSH_FORCE = 70
-const PUSH_FORCE = 150
-const DAMAGE = 5
+const MAX_HP = 100.0
+const SPEED = 100.0
+const MIN_PUSH_FORCE = 70.0
+const PUSH_FORCE = 150.0
+const DAMAGE = 10.0
 const SUMMON_COOLDOWN = 3.0
+const HIT_COOLDOWN = 2.0
 
 enum ENEMY_STATE {
 	SPAWNING,
-	DEFAULT
+	DEFAULT,
+	DIE
 }
 
 onready var portalScene = preload("res://scenes/gameplay/portal.tscn")
@@ -37,18 +39,30 @@ var summonedPortalForBullets = []
 
 var manaProgress = 1.0
 
+var canHit = true
+var hitTimer = 0
+
 func setState(value):
 	var old_state = currentState
 	
 	currentState = value
 	
+	match currentState:
+		ENEMY_STATE.DIE:
+			m_horizontalVelocity = 0
+			hurtbox.set_deferred("monitorable", false)
+			pushArea.set_deferred("monitorable", false)
+			sprite.material.set_shader_param("u_die", true)
+			tween.interpolate_method(self, "updateDeathProgress", 0, 5, .5, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+			tween.connect("tween_completed", self, "tweenCompleted")
 
 func setHp(value):
 	currentHp = min(MAX_HP, max(0, value))
 	healthBar.material.set_shader_param("u_hpPerc", currentHp / MAX_HP)
 	
-	if tween.is_active():
-		tween.stop_all()
+#	if tween.is_active():
+#		tween.stop_all(
+	tween.stop(self, "modulate")
 	tween.interpolate_property(healthBar, "modulate", 
 	  Color(1,1,1,1), Color(1,1,1,0), 1.0, 
 	  Tween.TRANS_LINEAR, Tween.EASE_IN)
@@ -58,7 +72,15 @@ func setHp(value):
 		die()
 
 func die():
-	queue_free()
+	self.currentState = ENEMY_STATE.DIE
+#	queue_free()
+
+func tweenCompleted(obj, prop):
+	if prop == ":updateDeathProgress":
+		queue_free()
+
+func updateDeathProgress(val):
+	sprite.material.set_shader_param("u_dieProgress", val)
 
 func _ready():
 	m_player = Globals.getSingle("player")
@@ -140,6 +162,7 @@ func _on_bullet_detector_area_entered(area: Area2D) -> void:
 		summonPortal(bullet)
 	
 func summonPortal(bullet):
+#	return
 	tween.interpolate_property(self, "manaProgress", 0, 1, SUMMON_COOLDOWN, Tween.TRANS_EXPO, Tween.EASE_IN)
 	tween.start()
 	
@@ -160,3 +183,13 @@ func summonPortal(bullet):
 	var misc = Globals.getSingle("misc")
 	
 	misc.call_deferred("add_child", new_portal)
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if !canHit:
+		return
+	var player = area.get_parent()
+	player.collision({
+		"from": "portal_enemy",
+		"damage": DAMAGE
+	})

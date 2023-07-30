@@ -1,10 +1,11 @@
 extends PlanetOrbiter
 
-const MAX_HP = 50
-const SPEED = 150
-const MIN_PUSH_FORCE = 70
-const PUSH_FORCE = 150
-const DAMAGE = 5
+const MAX_HP = 100.0
+const SPEED = 150.0
+const MIN_PUSH_FORCE = 70.0
+const PUSH_FORCE = 150.0
+const DAMAGE = 5.0
+const HIT_COOLDOWN = 2.0
 
 enum ENEMY_STATE {
 	SPAWNING,
@@ -27,6 +28,9 @@ var currentHp = MAX_HP setget setHp
 var currentState = ENEMY_STATE.SPAWNING setget setState
 
 var spawnProgress = 0.0
+
+var canHit = true
+var hitTimer = 0
 
 func setState(value):
 	var old_state = currentState
@@ -64,7 +68,7 @@ func die():
 
 func tweenCompleted(obj, prop):
 	print(obj, prop)
-	if prop == "updateDeathProgress":
+	if prop == ":updateDeathProgress":
 		queue_free()
 
 func updateDeathProgress(val):
@@ -102,6 +106,12 @@ func _process(delta: float) -> void:
 		
 	sprite.flip_h = sign(m_horizontalVelocity) == -1
 	
+	if !canHit:
+		hitTimer += delta
+		if hitTimer >= HIT_COOLDOWN:
+			canHit = true
+			hitTimer = 0.0
+	
 func updateStateSpawning(delta):
 	spawnProgress += delta
 	spawnProgress = min(1, spawnProgress)
@@ -133,3 +143,12 @@ func updateDirToPlayer():
 	var dir_this_frame = sign(Ranges.circShortestDiff(m_currentAngle, m_player.m_currentAngle, 0, 2 * PI))
 	
 	m_velocity.x += dir_this_frame * SPEED
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if !canHit:
+		return
+	var player = area.get_parent()
+	player.collision({
+		"from": "enemy",
+		"damage": DAMAGE
+	})

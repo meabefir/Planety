@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/gameplay/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/kenney_platformer-characters/PNG/Zombie/Poses/zombie_walk1.png" type="Texture" id=2]
@@ -108,6 +108,8 @@ height = 30.0
 [sub_resource type="CircleShape2D" id=3]
 radius = 40.0
 
+[sub_resource type="CapsuleShape2D" id=24]
+
 [node name="enemy" type="Node2D" groups=["basic_enemy", "enemy"]]
 script = ExtResource( 1 )
 
@@ -148,3 +150,13 @@ shape = SubResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
 unique_name_in_owner = true
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( 0, -44 )
+rotation = 1.57079
+shape = SubResource( 24 )
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
