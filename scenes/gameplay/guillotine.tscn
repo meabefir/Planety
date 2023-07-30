@@ -15,27 +15,29 @@ const float PI = 3.141592653;
 uniform float u_lifePerc = .5;
 
 void fragment() {
-	vec4 col = vec4(1.);
+	vec4 col = vec4(0,0,0,1);
 	vec2 uv = UV;
 	uv -= vec2(.5,.5);
 	float dist = length(uv);
 	if (dist < .4 || dist > .5) {
 		col.a = 0.;
 	}
-	
+	uv.y *= -1.;
+	uv.x *= -1.;
 	float angle = atan(uv.y, uv.x);
-	angle  = 1. - angle / PI;
-	float angle_perc = angle / (2. * PI);
-	if (angle_perc > 1. - u_lifePerc) {
-		col.a = 0.;
-	}
-	 
+	float normalized_angle = 1. - angle / PI;
+	col.r = normalized_angle;
+
+//	if (normalized_angle > u_lifePerc) {
+//		col.a = 0.;
+//	}
+
 	COLOR = col;
 }"
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = SubResource( 9 )
-shader_param/u_lifePerc = 0.688
+shader_param/u_lifePerc = 1.186
 
 [sub_resource type="ExternalTexture" id=8]
 size = Vector2( 170, 170 )
@@ -167,16 +169,13 @@ m_height = -510.0
 [node name="pivot" type="Node2D" parent="."]
 
 [node name="handle" type="Node2D" parent="pivot"]
-rotation = 0.785398
 
 [node name="hp" type="Sprite" parent="pivot/handle"]
 unique_name_in_owner = true
 material = SubResource( 10 )
-position = Vector2( 1.41422, -69.2965 )
 texture = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="pivot/handle"]
-position = Vector2( 0, -60 )
 rotation = -0.785398
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 1 )
@@ -184,7 +183,7 @@ texture = ExtResource( 1 )
 [node name="warning" type="Sprite" parent="pivot/handle"]
 unique_name_in_owner = true
 material = SubResource( 5 )
-position = Vector2( 7.62939e-06, -126 )
+position = Vector2( 0, -81 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 3 )
 
@@ -196,7 +195,7 @@ monitoring = false
 
 [node name="hitbox_collision" type="CollisionShape2D" parent="pivot/handle/hit_box"]
 unique_name_in_owner = true
-position = Vector2( 3.63798e-12, -71 )
+position = Vector2( 3.55271e-15, -8 )
 scale = Vector2( 5.71114, 1.95799 )
 shape = SubResource( 1 )
 

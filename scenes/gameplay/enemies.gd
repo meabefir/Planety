@@ -1,7 +1,7 @@
 extends Node2D
 
-const N_MAX_BASIC_ENEMIES = 0
-const N_MAX_PORTAL_ENEMIES = 2
+const N_MAX_BASIC_ENEMIES = 5
+const N_MAX_PORTAL_ENEMIES = 0
 
 onready var m_enemyScene = preload("res://scenes/gameplay/enemy.tscn")
 onready var m_portalEnemyScene = preload("res://scenes/gameplay/portal_enemy.tscn")
