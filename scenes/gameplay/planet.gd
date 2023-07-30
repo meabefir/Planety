@@ -21,7 +21,7 @@ func arcToAngle(a, height_offset = 0):
 	return (a / getCircumference(height_offset)) * 2 * PI
 	
 func _ready() -> void:
-	print(radius)
+#	print(radius)
 	pass
 	
 func _process(delta: float) -> void:

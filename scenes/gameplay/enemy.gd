@@ -8,7 +8,8 @@ const DAMAGE = 5
 
 enum ENEMY_STATE {
 	SPAWNING,
-	DEFAULT
+	DEFAULT,
+	DIE
 }
 
 
@@ -33,13 +34,23 @@ func setState(value):
 	
 	currentState = value
 	
+	match currentState:
+		ENEMY_STATE.DIE:
+			print("DIE")
+			m_horizontalVelocity = 0
+			hurtbox.set_deferred("monitorable", false)
+			pushArea.set_deferred("monitorable", false)
+			sprite.material.set_shader_param("u_die", true)
+			tween.interpolate_method(self, "updateDeathProgress", 0, 5, .5, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+			tween.connect("tween_completed", self, "tweenCompleted")
 
 func setHp(value):
 	currentHp = min(MAX_HP, max(0, value))
 	healthBar.material.set_shader_param("u_hpPerc", currentHp / MAX_HP)
 	
-	if tween.is_active():
-		tween.stop_all()
+#	if tween.is_active():
+#		tween.stop_all(
+	tween.stop(self, "modulate")
 	tween.interpolate_property(healthBar, "modulate", 
 	  Color(1,1,1,1), Color(1,1,1,0), 1.0, 
 	  Tween.TRANS_LINEAR, Tween.EASE_IN)
@@ -49,7 +60,16 @@ func setHp(value):
 		die()
 
 func die():
-	queue_free()
+	self.currentState = ENEMY_STATE.DIE
+#	queue_free()
+
+func tweenCompleted(obj, prop):
+	print(obj, prop)
+	if prop == "updateDeathProgress":
+		queue_free()
+
+func updateDeathProgress(val):
+	sprite.material.set_shader_param("u_dieProgress", val)
 
 func _ready():
 	m_player = Globals.getSingle("player")
@@ -80,6 +100,8 @@ func _process(delta: float) -> void:
 			updateStateSpawning(delta)
 		ENEMY_STATE.DEFAULT:
 			updateStateDefault(delta)
+		
+	sprite.flip_h = sign(m_horizontalVelocity) == -1
 	
 func updateStateSpawning(delta):
 	spawnProgress += delta

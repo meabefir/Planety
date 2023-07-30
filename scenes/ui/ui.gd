@@ -8,6 +8,6 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func die(from):
-	print("here")
+#	print("here")
 	deathUi.updateData(from)
 	deathUi.visible = true

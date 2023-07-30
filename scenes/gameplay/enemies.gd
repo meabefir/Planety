@@ -1,7 +1,7 @@
 extends Node2D
 
-const N_MAX_BASIC_ENEMIES = 5
-const N_MAX_PORTAL_ENEMIES = 2
+const N_MAX_BASIC_ENEMIES = 1
+const N_MAX_PORTAL_ENEMIES = 0
 
 onready var m_enemyScene = preload("res://scenes/gameplay/enemy.tscn")
 onready var m_portalEnemyScene = preload("res://scenes/gameplay/portal_enemy.tscn")
@@ -34,7 +34,7 @@ func spawnWaveRelativeToPlayer(count, angle):
 		return
 		
 	var a = player.m_currentAngle + angle
-	print(rad2deg(player.m_currentAngle), " ", rad2deg(a))
+#	print(rad2deg(player.m_currentAngle), " ", rad2deg(a))
 	spawnRandomWave(count, a, sign(angle))
 
 func spawnRandomWave(enemy_count, angle = null, dir=1):

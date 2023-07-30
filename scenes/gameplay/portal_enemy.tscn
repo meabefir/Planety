@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/gameplay/hurtbox.gd" type="Script" id=1]
 [ext_resource path="res://scenes/gameplay/portal_enemy.gd" type="Script" id=2]
@@ -42,6 +42,10 @@ uniform vec4 u_targetColor: hint_color = vec4(.8, .0, .8, 1.);
 
 uniform bool u_changeColor = false;
 
+uniform sampler2D u_disolveTex;
+uniform bool u_die = false;
+uniform float u_dieProgress = 0.;
+
 void fragment() {
 	COLOR = texture(TEXTURE, UV);
 		
@@ -58,7 +62,23 @@ void fragment() {
 		if (sim > .3)
 			COLOR.rgb = mix(COLOR.rgba, u_targetColor, sim).rgb;
 	}
+	
+	if (u_die) {
+		if (COLOR.a != 0.)
+			COLOR.a = max(COLOR.a - texture(u_disolveTex, UV).r * u_dieProgress, 0.);
+//			COLOR.a = texture(u_disolveTex, UV).r;
+	}
 }"
+
+[sub_resource type="OpenSimplexNoise" id=22]
+period = 30.1
+persistence = 0.342
+lacunarity = 1.85
+
+[sub_resource type="NoiseTexture" id=23]
+width = 256
+height = 256
+noise = SubResource( 22 )
 
 [sub_resource type="ShaderMaterial" id=14]
 resource_local_to_scene = true
@@ -68,6 +88,9 @@ shader_param/u_margin = 0.15
 shader_param/u_baseColor = Color( 0.5, 0.3, 0, 1 )
 shader_param/u_targetColor = Color( 0.317647, 0, 1, 1 )
 shader_param/u_changeColor = true
+shader_param/u_die = false
+shader_param/u_dieProgress = 0.0
+shader_param/u_disolveTex = SubResource( 23 )
 
 [sub_resource type="AtlasTexture" id=16]
 flags = 4
@@ -96,6 +119,38 @@ radius = 40.0
 
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 277, 86 )
+
+[sub_resource type="Shader" id=20]
+code = "// NOTE: Shader automatically converted from Godot Engine 3.5.2.stable's CanvasItemMaterial.
+
+shader_type canvas_item;
+render_mode blend_mix;
+
+uniform vec4 u_color: hint_color = vec4(1,0,1,1);
+uniform float u_progress = 1.;
+
+void fragment() {
+	vec4 col = vec4(1.);
+	
+	float dist = distance(UV, vec2(.5, .5));
+	if (dist > .5) 
+		col.a = 0.;
+	else {
+		col.a = .5 - dist;
+	}
+	col.a = pow(col.a, .8);
+	col.rgb = u_color.rgb;
+	col.a *= u_progress;
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=21]
+shader = SubResource( 20 )
+shader_param/u_color = Color( 1, 0, 1, 1 )
+shader_param/u_progress = 1.0
+
+[sub_resource type="ExternalTexture" id=19]
+size = Vector2( 20, 20 )
 
 [node name="portal_enemy" type="Node2D" groups=["enemy", "portal_enemy"]]
 script = ExtResource( 2 )
@@ -143,6 +198,12 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bullet_detector"]
 position = Vector2( 0, -1 )
 shape = SubResource( 18 )
+
+[node name="portal_notifier" type="Sprite" parent="."]
+unique_name_in_owner = true
+material = SubResource( 21 )
+texture = SubResource( 19 )
+offset = Vector2( 0, -115 )
 
 [node name="Tween" type="Tween" parent="."]
 unique_name_in_owner = true

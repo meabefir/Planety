@@ -42,10 +42,9 @@ func _on_Area2D_area_entered(area: Area2D) -> void:
 			"damage": DAMAGE,
 			"from": "bullet"
 		})
-	
-	currentHp -= 1
-	if currentHp == 0:
-		queue_free()
+		currentHp -= 1
+		if currentHp == 0:
+			queue_free()
 
 func disable():
 	visible = false

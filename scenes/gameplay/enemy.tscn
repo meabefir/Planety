@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/gameplay/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/kenney_platformer-characters/PNG/Zombie/Poses/zombie_walk1.png" type="Texture" id=2]
@@ -43,6 +43,10 @@ uniform vec4 u_targetColor: hint_color = vec4(.8, .0, .8, 1.);
 
 uniform bool u_changeColor = false;
 
+uniform sampler2D u_disolveTex;
+uniform bool u_die = false;
+uniform float u_dieProgress = 0.;
+
 void fragment() {
 	COLOR = texture(TEXTURE, UV);
 		
@@ -59,7 +63,23 @@ void fragment() {
 		if (sim > .3)
 			COLOR.rgb = mix(COLOR.rgba, u_targetColor, sim).rgb;
 	}
+	
+	if (u_die) {
+		if (COLOR.a != 0.)
+			COLOR.a = max(COLOR.a - texture(u_disolveTex, UV).r * u_dieProgress, 0.);
+//			COLOR.a = texture(u_disolveTex, UV).r;
+	}
 }"
+
+[sub_resource type="OpenSimplexNoise" id=22]
+period = 30.1
+persistence = 0.342
+lacunarity = 1.85
+
+[sub_resource type="NoiseTexture" id=23]
+width = 256
+height = 256
+noise = SubResource( 22 )
 
 [sub_resource type="ShaderMaterial" id=13]
 resource_local_to_scene = true
@@ -69,6 +89,9 @@ shader_param/u_margin = 0.15
 shader_param/u_baseColor = Color( 0.5, 0.3, 0, 1 )
 shader_param/u_targetColor = Color( 0.819608, 0.00392157, 0.819608, 1 )
 shader_param/u_changeColor = false
+shader_param/u_die = true
+shader_param/u_dieProgress = 0.0
+shader_param/u_disolveTex = SubResource( 23 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

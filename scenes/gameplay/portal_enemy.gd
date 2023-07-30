@@ -20,6 +20,7 @@ onready var healthBar = $"%health_bar"
 onready var tween: Tween = $"%Tween"
 onready var hurtbox = $"%hurtbox"
 onready var sprite = $"%sprite"
+onready var portalNotifier = $"%portal_notifier"
 
 var pushAreaTimer
 
@@ -33,6 +34,8 @@ var canSummonPortal = true
 var summonProgress = 0
 
 var summonedPortalForBullets = []
+
+var manaProgress = 1.0
 
 func setState(value):
 	var old_state = currentState
@@ -87,6 +90,9 @@ func _process(delta: float) -> void:
 		ENEMY_STATE.DEFAULT:
 			updateStateDefault(delta)
 			
+	sprite.flip_h = sign(m_horizontalVelocity) == -1
+	portalNotifier.material.set_shader_param("u_progress", manaProgress)
+#	print(manaProgress)
 	if !canSummonPortal:
 		summonProgress += delta
 		if summonProgress >= SUMMON_COOLDOWN:
@@ -134,6 +140,9 @@ func _on_bullet_detector_area_entered(area: Area2D) -> void:
 		summonPortal(bullet)
 	
 func summonPortal(bullet):
+	tween.interpolate_property(self, "manaProgress", 0, 1, SUMMON_COOLDOWN, Tween.TRANS_EXPO, Tween.EASE_IN)
+	tween.start()
+	
 	canSummonPortal = false
 	summonedPortalForBullets.append(bullet)
 	var dir = Ranges.circShortestDiff(m_currentAngle, bullet.m_currentAngle)

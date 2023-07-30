@@ -81,6 +81,7 @@ func _on_area_area_entered(area: Area2D) -> void:
 		queue_free()
 	
 func teleport(bullet):
+	bullet.currentHp = 1
 	bullet.m_currentSpeed *= .8
 	bullet.m_currentAngle = m_currentAngle
 	bullet.enable()
