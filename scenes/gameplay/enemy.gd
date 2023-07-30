@@ -61,11 +61,11 @@ func _ready():
 	
 	self.currentHp = MAX_HP
 	
-	hurtbox.connect("hurt", self, "hurt")
+	hurtbox.connect("collision", self, "collision")
 	
 	sprite.material.set_shader_param("u_spawnProgress", 0)
 	
-func hurt(data):
+func collision(data):
 	var damage = data["damage"]
 	self.currentHp -= damage
 	

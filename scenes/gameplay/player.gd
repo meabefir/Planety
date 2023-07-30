@@ -11,16 +11,17 @@ const EARTH_SPIN_VELOCITY = 500
 const MAX_HP = 200.0
 
 onready var bulletScene = preload("res://scenes/gameplay/bullet.tscn")
-
+ 
 onready var m_healthBar: TextureProgress = $"%health_bar"
 onready var m_hurtBox = $"%hurt_box"
+onready var sprite = get_node("Sprite")
 
 var m_velocity: Vector2 = Vector2.ZERO	
 var m_lastHorizontalDir = 1
 
 var m_currentHp = MAX_HP setget setHp
 
-
+var lastDamageFrom = ""
 var spawnHalfPlayer = false
 
 func setHp(val):
@@ -30,6 +31,7 @@ func setHp(val):
 		die()
 
 func die():
+	Globals.getSingle("ui").die(lastDamageFrom)
 	queue_free()
 
 # Called when the node enters the scene tree for the first time.
@@ -38,16 +40,17 @@ func _ready() -> void:
 	
 	m_currentAngle = -PI / 2
 	
-	m_hurtBox.connect("hurt", self, "hurt")
+	m_hurtBox.connect("collision", self, "collision")
 	
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		shootAction()
 	
-	if Input.is_action_just_pressed("test"):
-		self.m_currentHp -= 10
+#	if Input.is_action_just_pressed("test"):
+#		self.m_currentHp -= 120
 
 func _process(delta: float) -> void:
+	sprite.flip_h = m_lastHorizontalDir != 1
 	var vec_input = Vector2.ZERO
 	if Input.is_action_pressed("left"):
 		vec_input.x -= 1
@@ -81,6 +84,8 @@ func _process(delta: float) -> void:
 	
 	if abs(m_velocity.x) > EARTH_SPIN_VELOCITY:
 		m_planet.m_currentAngle -= deg2rad(m_velocity.x / 20 * delta)
+		
+	m_planet.m_currentAngle = -m_currentAngle - PI / 2
 	
 func jump():
 	m_velocity.y = JUMP_FORCE
@@ -93,12 +98,13 @@ func shootAction():
 		_dir = m_lastHorizontalDir
 	
 	var new_bullet = bulletScene.instance()
-	new_bullet.m_currentAngle = m_currentAngle + m_planet.arcToAngle(60 * sign(m_horizontalVelocity), 40)
+	new_bullet.m_currentAngle = m_currentAngle + m_planet.arcToAngle(60 * sign(_dir), 40)
 	
 	new_bullet.m_dir = _dir
 	new_bullet.m_planet = Globals.getSingle("planet")
 	new_bullet.m_height = 40
 	Globals.getSingle("projectiles").add_child(new_bullet)
 	
-func hurt(data):
+func collision(data):
+	lastDamageFrom = data["from"]
 	self.m_currentHp -= data["damage"]

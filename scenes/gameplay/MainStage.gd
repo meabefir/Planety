@@ -5,3 +5,9 @@ func _ready() -> void:
 
 func onScreenResize():
 	print(get_viewport_rect().size)
+
+func restart():
+	get_tree().reload_current_scene()
+
+func quit():
+	get_tree().quit()

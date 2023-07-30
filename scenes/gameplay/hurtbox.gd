@@ -2,7 +2,7 @@ extends Area2D
 
 class_name Hurtbox
 
-signal hurt(data)
+signal collision(data)
 
-func hurt(data = {}):
-	emit_signal("hurt", data)
+func collision(data = {}):
+	emit_signal("collision", data)

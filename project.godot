@@ -41,11 +41,6 @@ config/icon="res://icon.png"
 Globals="*res://global/Globals.gd"
 Ranges="*res://global/Ranges.gd"
 
-[display]
-
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
-
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
