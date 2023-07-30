@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/ui/main_menu.gd" type="Script" id=1]
+[ext_resource path="res://scenes/gameplay/planet.gd" type="Script" id=2]
+[ext_resource path="res://assets/kenney_planets/Planets/planet09.png" type="Texture" id=3]
+[ext_resource path="res://assets/kenney_platformer-characters/PNG/Adventurer/Poses/adventurer_idle.png" type="Texture" id=4]
+[ext_resource path="res://scenes/ui/main_menu_dummy.gd" type="Script" id=5]
+
+[node name="main_menu" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="planet" type="Node2D" parent="." groups=["planet"]]
+position = Vector2( -489, 63 )
+script = ExtResource( 2 )
+radius = 510.0
+
+[node name="Sprite" type="Sprite" parent="planet"]
+texture = ExtResource( 3 )
+
+[node name="main_menu_dummy" type="Node2D" parent="planet"]
+script = ExtResource( 5 )
+m_currentAngle = 3.142
+
+[node name="Sprite" type="Sprite" parent="planet/main_menu_dummy"]
+position = Vector2( 0, -57 )
+texture = ExtResource( 4 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 2.5, 2.5 )

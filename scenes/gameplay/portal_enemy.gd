@@ -5,13 +5,14 @@ const SPEED = 100
 const MIN_PUSH_FORCE = 70
 const PUSH_FORCE = 150
 const DAMAGE = 5
+const SUMMON_COOLDOWN = 3.0
 
 enum ENEMY_STATE {
 	SPAWNING,
 	DEFAULT
 }
 
-var m_velocity = Vector2.ZERO
+onready var portalScene = preload("res://scenes/gameplay/portal.tscn")
 
 onready var m_player = null
 onready var pushArea: Area2D = $"push_area"
@@ -22,10 +23,16 @@ onready var sprite = $"%sprite"
 
 var pushAreaTimer
 
+var m_velocity = Vector2.ZERO
 var currentHp = MAX_HP setget setHp
 var currentState = ENEMY_STATE.SPAWNING setget setState
 
 var spawnProgress = 0.0
+
+var canSummonPortal = true
+var summonProgress = 0
+
+var summonedPortalForBullets = []
 
 func setState(value):
 	var old_state = currentState
@@ -79,6 +86,12 @@ func _process(delta: float) -> void:
 			updateStateSpawning(delta)
 		ENEMY_STATE.DEFAULT:
 			updateStateDefault(delta)
+			
+	if !canSummonPortal:
+		summonProgress += delta
+		if summonProgress >= SUMMON_COOLDOWN:
+			summonProgress = 0.0
+			canSummonPortal = true
 	
 func updateStateSpawning(delta):
 	spawnProgress += delta
@@ -111,3 +124,30 @@ func updateDirToPlayer():
 	var dir_this_frame = sign(Ranges.circShortestDiff(m_currentAngle, m_player.m_currentAngle, 0, 2 * PI))
 	
 	m_velocity.x += dir_this_frame * SPEED
+
+
+func _on_bullet_detector_area_entered(area: Area2D) -> void:
+	var bullet = area.get_parent()
+	if canSummonPortal and not bullet in summonedPortalForBullets and sign(bullet.m_horizontalVelocity) != sign(m_horizontalVelocity):
+#	if canSummonPortal and not bullet in summonedPortalForBullets and \
+#	 sign(m_horizontalVelocity) == sign(Ranges.circShortestDiff(bullet.m_currentAngle, m_currentAngle)):
+		summonPortal(bullet)
+	
+func summonPortal(bullet):
+	canSummonPortal = false
+	summonedPortalForBullets.append(bullet)
+	var dir = Ranges.circShortestDiff(m_currentAngle, bullet.m_currentAngle)
+	
+	var distance_to_bullet = m_planet.angleToArc(abs(dir), bullet.m_height)
+	if distance_to_bullet < 75:
+		return
+	
+	dir = sign(dir)
+	var portal_angle = m_currentAngle + m_planet.arcToAngle(min(150, max(75, distance_to_bullet)) * dir)
+	
+	var new_portal = portalScene.instance()
+	new_portal.dir = dir
+	new_portal.m_currentAngle = portal_angle
+	var misc = Globals.getSingle("misc")
+	
+	misc.call_deferred("add_child", new_portal)

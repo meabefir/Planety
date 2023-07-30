@@ -32,12 +32,13 @@ script = ExtResource( 4 )
 autostart = true
 
 [node name="portal_enemy_spawn_timer" type="Timer" parent="planet/enemies"]
-wait_time = 3.0
 autostart = true
 
 [node name="player" parent="planet" groups=["player"] instance=ExtResource( 3 )]
 
 [node name="guillotine" parent="planet" instance=ExtResource( 6 )]
+
+[node name="misc" type="Node2D" parent="planet" groups=["misc"]]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, -550 )

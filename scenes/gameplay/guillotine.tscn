@@ -150,13 +150,13 @@ texture = ExtResource( 3 )
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 2
+monitoring = false
 
 [node name="hitbox_collision" type="CollisionShape2D" parent="pivot/handle/hit_box"]
 unique_name_in_owner = true
 position = Vector2( 3.63798e-12, -71 )
 scale = Vector2( 5.71114, 1.95799 )
 shape = SubResource( 1 )
-disabled = true
 
 [node name="notice_area" type="Area2D" parent="."]
 unique_name_in_owner = true

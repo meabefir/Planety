@@ -49,7 +49,8 @@ func setState(value):
 		GUILLOTINE_STATE.RECOVER_TO_WANDER:
 			warningSprite.visible = false
 		GUILLOTINE_STATE.CHARGE:
-			hitboxCollision.disabled = true
+#			hitboxCollision.disabled = true
+			hitBox.monitoring = false
 			if damageToPlayerThisCharge == 0:
 				onChargeNoDamage()
 			
@@ -75,7 +76,8 @@ func setState(value):
 			wanderTimer = 0
 		GUILLOTINE_STATE.CHARGE:
 			m_verticalVelocity = 0
-			hitboxCollision.disabled = false
+#			hitboxCollision.disabled = false
+			hitBox.monitoring = true
 			animationPlayer.play("charge")
 			damageToPlayerThisCharge = 0
 	

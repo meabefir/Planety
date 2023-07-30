@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/gameplay/portal.gd" type="Script" id=1]
+
+[sub_resource type="Shader" id=3]
+code = "// NOTE: Shader automatically converted from Godot Engine 3.5.2.stable's CanvasItemMaterial.
+
+shader_type canvas_item;
+render_mode blend_mix;
+
+uniform vec4 u_color: hint_color = vec4(0,0,1,1);
+uniform float u_progress = .5f;
+
+void fragment() {
+	vec4 col = COLOR;
+	vec2 uv = UV;
+	uv.x *= .5;
+	uv -= vec2(0.);
+	float dist = distance(uv, vec2(0., .5));
+	
+	if (dist > .3) {
+		float diff = dist - .3;
+		diff /= .2;
+		col.a = 1. - diff;
+	}
+	if (dist > .5) {
+		col.a = 0.;
+	}
+	col.rgb = u_color.rgb;
+	
+	col.a *= u_progress;
+	
+	col.a *= 2.;
+	
+	COLOR = col;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = SubResource( 3 )
+shader_param/u_color = Color( 0, 0.101961, 1, 1 )
+shader_param/u_progress = 0.5
+
+[sub_resource type="ExternalTexture" id=1]
+size = Vector2( 10, 80 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 49 )
+
+[node name="portal" type="Node2D"]
+script = ExtResource( 1 )
+blueColor = Color( 0, 0.227451, 1, 1 )
+orangeColor = Color( 1, 0.560784, 0, 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+unique_name_in_owner = true
+material = SubResource( 4 )
+texture = SubResource( 1 )
+offset = Vector2( 0, -40 )
+
+[node name="area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="coll_shape" type="CollisionShape2D" parent="area"]
+unique_name_in_owner = true
+position = Vector2( 0, -39 )
+shape = SubResource( 2 )
+
+[connection signal="area_entered" from="area" to="." method="_on_area_area_entered"]

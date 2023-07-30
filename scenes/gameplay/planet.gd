@@ -2,7 +2,6 @@ extends Node2D
 
 class_name Planet
 
-onready var sprite = get_node("Sprite")
 export var radius: float = 100
 var timer = 0.0 
 var m_currentAngle = 0 
