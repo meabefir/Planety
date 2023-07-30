@@ -13,6 +13,8 @@ const WANDER_SPEED = 600
 const NOTICE_SPEED = 200
 const NOTICE_SPEED_HEIGHT = 150
 const CHARGE_SPEED = 350
+const CHARGE_DAMAGE = 15
+const DAMAGE_TO_SPLIT = 3 * CHARGE_DAMAGE
 
 onready var animationPlayer = get_node("AnimationPlayer")
 onready var warningSprite = $"%warning"
@@ -33,6 +35,8 @@ var lastWanderAngle = 0
 var lastWanderHeight = 0
 
 var dir = 1
+
+var damageToPlayerThisCharge = 0
 
 func setState(value):
 	var prev_state = currentState
@@ -71,6 +75,7 @@ func setState(value):
 			m_verticalVelocity = 0
 			hitboxCollision.disabled = false
 			animationPlayer.play("charge")
+			damageToPlayerThisCharge = 0
 	
 func _ready() -> void:
 	m_planet = Globals.getSingle("planet")
@@ -170,9 +175,15 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 #	hit player 
 #	print("hit player")
 	area.collision({
-		"damage": 15,
+		"damage": CHARGE_DAMAGE,
 		"from": "guillotine"
 	})
+	damageToPlayerThisCharge += CHARGE_DAMAGE
+	if damageToPlayerThisCharge > DAMAGE_TO_SPLIT:
+		splitPlayer()
+	
+func splitPlayer():
+	pass
 	
 func _on_notice_area_area_entered(area: Area2D) -> void:
 	if not currentState in [GUILLOTINE_STATE.WANDER, GUILLOTINE_STATE.RECOVER_TO_WANDER]:
