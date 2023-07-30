@@ -1,10 +1,10 @@
 extends PlanetOrbiter
 
-const MAX_HP = 100.0
+const MAX_HP = 21.0
 const SPEED = 150.0
 const MIN_PUSH_FORCE = 70.0
 const PUSH_FORCE = 150.0
-const DAMAGE = 5.0
+const DAMAGE = 3.0
 const HIT_COOLDOWN = 2.0
 
 enum ENEMY_STATE {

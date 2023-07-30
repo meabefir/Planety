@@ -2,7 +2,7 @@ extends PlanetOrbiter
 
 const LIFE_TIME = 5.5
 const SPEED = 1000.0
-const DAMAGE = 6.66
+const DAMAGE = 7
 
 var m_dir = 1
 export var m_currentSpeed = SPEED
@@ -13,7 +13,7 @@ onready var area = get_node("Area2D")
 
 var disabled = false
 var lifeTimer = 0
-var currentHp = 35
+var currentHp = 4
 
 func _ready() -> void:
 	m_sprite.flip_v = true if m_dir == -1 else false

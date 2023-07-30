@@ -4,7 +4,7 @@ const TOP_SPEED = 350.0
 const BASE_SPEED = 250.0
 const ACC = 25.0
 const DEC = 70.0
-const JUMP_FORCE = 800.0
+const JUMP_FORCE = 900.0
 const G = 20.0
 const EARTH_SPIN_VELOCITY = 500
 
