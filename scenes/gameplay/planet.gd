@@ -2,6 +2,11 @@ extends Node2D
 
 class_name Planet
 
+<<<<<<< Updated upstream
+=======
+onready var sprite = get_node("sprite")
+onready var potionSprite = get_node("Potion")
+>>>>>>> Stashed changes
 export var radius: float = 100
 var timer = 0.0 
 var m_currentAngle = 0 
@@ -25,6 +30,7 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	rotation_degrees = rad2deg(m_currentAngle)
+	
 #	if Globals.getSingle("player").spawnHalfPlayer:
 #		if get_tree().get_nodes_in_group("halfPlayer").size() < 1:
 #			spawnHalfPlayer()
@@ -37,7 +43,6 @@ func spawnPotions(delta: float):
 	timer += delta
 	if timer >= 1:
 		addPotion()
-	
 		
 func spawnHalfPlayer():
 	var halfPlayer = halfPlayerScene.instance()

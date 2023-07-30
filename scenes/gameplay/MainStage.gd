@@ -1,5 +1,6 @@
 extends Node2D
 
+
 func _ready() -> void:
 	get_tree().get_root().connect("size_changed", self, "onScreenResize")
 
@@ -11,3 +12,4 @@ func restart():
 
 func quit():
 	get_tree().quit()
+

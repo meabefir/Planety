@@ -11,20 +11,19 @@ const EARTH_SPIN_VELOCITY = 500
 const MAX_HP = 200.0
 
 onready var bulletScene = preload("res://scenes/gameplay/bullet.tscn")
- 
+onready var potionScene = preload("res://scenes/gameplay/Potion.tscn")
 onready var m_healthBar: TextureProgress = $"%health_bar"
 onready var m_hurtBox = $"%hurt_box"
 onready var sprite = get_node("Sprite")
-
 var m_velocity: Vector2 = Vector2.ZERO	
 var m_lastHorizontalDir = 1
 
-var m_currentHp = MAX_HP setget setHp
+export var m_currentHp = MAX_HP setget setHp
 
 var lastDamageFrom = ""
 
 export var spawnHalfPlayer = false
-
+var timer = 0.0
 func setHp(val):
 	m_currentHp = max(0, min(MAX_HP, val))
 	m_healthBar.value = (m_currentHp / MAX_HP) * (m_healthBar.max_value - m_healthBar.min_value)
@@ -52,7 +51,9 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	sprite.flip_h = m_lastHorizontalDir != 1
-
+	timer += delta
+	var potion_cooldown = Globals.getSingle("potion_ui")
+	
 	var vec_input = Vector2.ZERO
 	if Input.is_action_pressed("left"):
 		vec_input.x -= 1
@@ -61,6 +62,20 @@ func _process(delta: float) -> void:
 		
 	if Input.is_action_pressed("spawn"):
 		spawnHalfPlayer = true
+		
+	if Input.is_action_pressed("potion"):
+		if Globals.getSingle("potion") == null && timer >= 5:
+			var potion = potionScene.instance()
+			potion.m_currentAngle = m_currentAngle
+			potion.m_horizontalVelocity = m_horizontalVelocity
+			add_child(potion)
+			timer = 0
+			
+	if timer < 5:
+		potion_cooldown.modulate.a = 0.5
+	if timer > 5:
+		potion_cooldown.modulate.a = 1
+			
 		
 	if Input.is_action_pressed("jump"):
 		if m_height == 0:

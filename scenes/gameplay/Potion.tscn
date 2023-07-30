@@ -4,9 +4,10 @@
 [ext_resource path="res://scenes/gameplay/Potion.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 370.0
+radius = 1080.0
+height = 560.0
 
-[node name="Potion" type="Node2D"]
+[node name="Potion" type="Node2D" groups=["potion"]]
 visible = false
 script = ExtResource( 2 )
 __meta__ = {

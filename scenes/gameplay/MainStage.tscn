@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=25 format=2]
+=======
+[gd_scene load_steps=12 format=2]
+>>>>>>> Stashed changes
 
 [ext_resource path="res://assets/kenney_planets/Planets/planet09.png" type="Texture" id=1]
 [ext_resource path="res://scenes/gameplay/planet.gd" type="Script" id=2]
@@ -9,6 +13,7 @@
 [ext_resource path="res://assets/fonts/ArialMedium.tres" type="DynamicFont" id=7]
 [ext_resource path="res://scenes/ui/ui.gd" type="Script" id=8]
 [ext_resource path="res://scenes/ui/death_ui.gd" type="Script" id=9]
+<<<<<<< Updated upstream
 [ext_resource path="res://assets/backgr/background/Blue Nebula/Blue_Nebula_01-1024x1024.png" type="Texture" id=10]
 [ext_resource path="res://scenes/gameplay/background.gd" type="Script" id=11]
 [ext_resource path="res://assets/backgr/particles/star_07.png" type="Texture" id=12]
@@ -68,6 +73,9 @@ color_ramp = SubResource( 8 )
 [sub_resource type="StreamTexture" id=10]
 flags = 4
 load_path = "res://.import/BasicParticle.png-ca31a9da88516931427595023b871772.stex"
+=======
+[ext_resource path="res://bottle.png" type="Texture" id=10]
+>>>>>>> Stashed changes
 
 [sub_resource type="Animation" id=1]
 resource_name = "die"
@@ -75,6 +83,7 @@ resource_name = "die"
 [node name="MainStage" type="Node2D"]
 script = ExtResource( 5 )
 
+<<<<<<< Updated upstream
 [node name="background" type="Sprite" parent="."]
 scale = Vector2( 3.5, 3.5 )
 texture = ExtResource( 10 )
@@ -110,6 +119,18 @@ amount = 3
 speed_scale = 0.5
 process_material = SubResource( 9 )
 texture = SubResource( 10 )
+=======
+[node name="Potion" type="Label" parent="."]
+margin_bottom = 1000.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="PotionSprite" type="Sprite" parent="Potion" groups=["potion_ui"]]
+position = Vector2( -700, -900 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 10 )
+>>>>>>> Stashed changes
 
 [node name="planet" type="Node2D" parent="." groups=["planet"]]
 script = ExtResource( 2 )

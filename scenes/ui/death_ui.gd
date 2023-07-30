@@ -10,7 +10,7 @@ func _ready() -> void:
 func updateData(from):
 	var text = ""
 	if from == "bullet":
-		text = "Get shredded"
+		text = "Get gunned down"
 	elif from == "guillotine":
 		text = "Even the mighty must bow their head"
 	
