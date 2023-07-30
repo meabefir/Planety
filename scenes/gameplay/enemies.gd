@@ -5,7 +5,7 @@ const N_MAX_PORTAL_ENEMIES = 2
 
 onready var m_enemyScene = preload("res://scenes/gameplay/enemy.tscn")
 onready var m_portalEnemyScene = preload("res://scenes/gameplay/portal_enemy.tscn")
-export var health: float = 50
+export var health: float = 35
 
 func _ready():
 	pass

@@ -1,6 +1,6 @@
 extends PlanetOrbiter
 
-const LIFE_TIME = 4.0
+const LIFE_TIME = 5.5
 const SPEED = 1000.0
 const DAMAGE = 6.66
 
@@ -11,20 +11,17 @@ onready var m_sprite = get_node("Sprite")
 onready var collShape = $"%coll_shape"
 onready var area = get_node("Area2D")
 
-var currentHp = 211
 var disabled = false
 var lifeTimer = 0
+var currentHp = 35
 
 func _ready() -> void:
 	m_sprite.flip_v = true if m_dir == -1 else false
 
-	
 #	queue_free()
 
 func die():
 	var tw = Tween.new()
-	tw.interpolate_property(self, "m_height", m_height, 0, 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	tw.interpolate_property(self, "m_currentSpeed", m_currentSpeed, 0, 1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	add_child(tw)
 	tw.start()
 	
