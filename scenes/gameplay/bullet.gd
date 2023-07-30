@@ -2,11 +2,8 @@ extends PlanetOrbiter
 
 const LIFE_TIME = 5.5
 const SPEED = 1000.0
-<<<<<<< Updated upstream
 const DAMAGE = 7
-=======
-const DAMAGE = 50
->>>>>>> Stashed changes
+
 
 var m_dir = 1
 export var m_currentSpeed = SPEED
@@ -17,11 +14,7 @@ onready var area = get_node("Area2D")
 
 var disabled = false
 var lifeTimer = 0
-<<<<<<< Updated upstream
 var currentHp = 4
-=======
-var currentHp = 7
->>>>>>> Stashed changes
 
 func _ready() -> void:
 	m_sprite.flip_v = true if m_dir == -1 else false

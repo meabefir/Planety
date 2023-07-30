@@ -1,12 +1,7 @@
 extends Node2D
 
-<<<<<<< Updated upstream
 const N_MAX_BASIC_ENEMIES = 10
 const N_MAX_PORTAL_ENEMIES = 1
-=======
-const N_MAX_BASIC_ENEMIES = 2
-const N_MAX_PORTAL_ENEMIES = 0
->>>>>>> Stashed changes
 
 onready var m_enemyScene = preload("res://scenes/gameplay/enemy.tscn")
 onready var m_portalEnemyScene = preload("res://scenes/gameplay/portal_enemy.tscn")
