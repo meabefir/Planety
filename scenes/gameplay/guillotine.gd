@@ -207,17 +207,18 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 func _on_hit_box_area_entered(area: Area2D) -> void:
 #	hit player 
 #	print("hit player")
-	area.collision({
-		"damage": CHARGE_DAMAGE,
-		"from": "guillotine"
-	})
-	damageToPlayerThisCharge += CHARGE_DAMAGE
-	if damageToPlayerThisCharge > DAMAGE_TO_SPLIT:
-		splitPlayer()
+	if area is Hurtbox:
+		area.collision({
+			"damage": CHARGE_DAMAGE,
+			"from": "guillotine"
+		})
+		damageToPlayerThisCharge += CHARGE_DAMAGE
+		if damageToPlayerThisCharge > DAMAGE_TO_SPLIT:
+			splitPlayer()
 	
 func splitPlayer():
 	print("split player")
-	pass
+#	Globals.getSingle("player").spawnHalfPlayer = true
 	
 func onChargeNoDamage():
 	var angle = PI / 4.0

@@ -2,6 +2,7 @@ extends PlanetOrbiter
 
 const START_VELOCITY = 300
 var m_velocity: Vector2 = Vector2.ZERO	
+var animationCompleted = false
 func _ready() -> void: 
 	visible = true
 	m_planet = Globals.getSingle("planet")
@@ -20,10 +21,13 @@ func _process(delta: float) -> void:
 	updateDirToPlayer(delta)
 
 func _on_GoDownTween_tween_all_completed() -> void:
-	pass
+	animationCompleted = true
 
 func _on_BottleShape_area_entered(area: Area2D) -> void:
-	queue_free()
+	
+	if animationCompleted:
+		queue_free()
+		print("Potion picked up")
 	
 	var player = Globals.getSingle("player")
 	player.m_currentHp += 10
