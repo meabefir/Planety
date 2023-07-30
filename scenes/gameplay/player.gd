@@ -8,7 +8,11 @@ const JUMP_FORCE = 900.0
 const G = 20.0
 const EARTH_SPIN_VELOCITY = 500
 
+<<<<<<< Updated upstream
 const MAX_HP = 12200.0
+=======
+const MAX_HP = 1000.0
+>>>>>>> Stashed changes
 
 onready var bulletScene = preload("res://scenes/gameplay/bullet.tscn")
 onready var potionScene = preload("res://scenes/gameplay/Potion.tscn")
@@ -71,11 +75,19 @@ func _process(delta: float) -> void:
 			add_child(potion)
 			timer = 0
 			
+<<<<<<< Updated upstream
 	if timer < 5:
 		potion_cooldown.modulate.a = 0.3
 	if timer > 5:
 		potion_cooldown.modulate.a = 1
 			
+=======
+#	if timer < 5:
+#		potion_cooldown.modulate.a = 0.5
+#	if timer > 5:
+#		potion_cooldown.modulate.a = 1
+		
+>>>>>>> Stashed changes
 	if Input.is_action_pressed("jump"):
 		if m_height == 0:
 			jump()
