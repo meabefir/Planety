@@ -12,7 +12,6 @@ enum ENEMY_STATE {
 	DIE
 }
 
-
 var m_velocity = Vector2.ZERO
 
 onready var m_player = null
