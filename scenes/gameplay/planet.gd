@@ -38,6 +38,7 @@ func spawnPotions(delta: float):
 	timer += delta
 	if timer >= 1:
 		addPotion()
+	
 		
 func spawnHalfPlayer():
 	var halfPlayer = halfPlayerScene.instance()

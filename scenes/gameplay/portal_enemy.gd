@@ -1,7 +1,7 @@
 extends PlanetOrbiter
 
-const MAX_HP = 50
-const SPEED = 150
+const MAX_HP = 100
+const SPEED = 100
 const MIN_PUSH_FORCE = 70
 const PUSH_FORCE = 150
 const DAMAGE = 5
@@ -10,7 +10,6 @@ enum ENEMY_STATE {
 	SPAWNING,
 	DEFAULT
 }
-
 
 var m_velocity = Vector2.ZERO
 

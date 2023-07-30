@@ -50,6 +50,8 @@ func setState(value):
 			warningSprite.visible = false
 		GUILLOTINE_STATE.CHARGE:
 			hitboxCollision.disabled = true
+			if damageToPlayerThisCharge == 0:
+				onChargeNoDamage()
 			
 	currentState = value
 	
@@ -85,6 +87,8 @@ func _ready() -> void:
 	warningSprite.visible = false
 	
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("test"):
+		onChargeNoDamage()
 #	print(GUILLOTINE_STATE.keys()[currentState])
 	match currentState:
 		GUILLOTINE_STATE.SPAWNING:
@@ -183,7 +187,13 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 		splitPlayer()
 	
 func splitPlayer():
+	print("split player")
 	pass
+	
+func onChargeNoDamage():
+	var angle = PI / 4.0
+	Globals.getSingle("enemies").spawnWaveRelativeToPlayer(3, angle)
+	Globals.getSingle("enemies").spawnWaveRelativeToPlayer(3, -angle)
 	
 func _on_notice_area_area_entered(area: Area2D) -> void:
 	if not currentState in [GUILLOTINE_STATE.WANDER, GUILLOTINE_STATE.RECOVER_TO_WANDER]:
