@@ -8,13 +8,14 @@ enum GUILLOTINE_STATE {
 	CHARGE
 }
 
-const WANDER_HEIGHT = 250
-const WANDER_SPEED = 600
-const NOTICE_SPEED = 200
-const NOTICE_SPEED_HEIGHT = 150
-const CHARGE_SPEED = 350
-const CHARGE_DAMAGE = 15
+const WANDER_HEIGHT = 250.0
+const WANDER_SPEED = 600.0
+const NOTICE_SPEED = 200.0
+const NOTICE_SPEED_HEIGHT = 150.0
+const CHARGE_SPEED = 350.0
+const CHARGE_DAMAGE = 15.0
 const DAMAGE_TO_SPLIT = 3 * CHARGE_DAMAGE
+const MAX_HP = 150.0
 
 onready var animationPlayer = get_node("AnimationPlayer")
 onready var warningSprite = $"%warning"
@@ -23,8 +24,26 @@ onready var noticeCollision = $"%notice_collision"
 onready var hitBox = $"%hit_box"
 onready var hitboxCollision = $"%hitbox_collision"
 onready var healthBar = $"%hp"
+onready var hurtbox: Hurtbox = $"%hurtbox"
 
 var currentState = GUILLOTINE_STATE.SPAWNING setget setState
+var currentHp: float = MAX_HP setget setHp
+
+func setHp(value):
+	currentHp = clamp(value, 0.0, MAX_HP)
+	
+	healthBar.material.set_shader_param("u_lifePerc", float(currentHp / MAX_HP) * 2.0 * PI - PI)
+	
+	print(currentHp)
+	if currentHp == 0:
+		print("DUIE")
+		print("DUIE")
+		print("DUIE")
+		print("DUIE")
+		print("DUIE")
+		get_tree().call_group("enemy", "die")
+		Globals.getSingle("enemies").stop()
+		queue_free()
 
 var wanderTimer = 0.0
 var noticeTimer = 0.0
@@ -88,6 +107,13 @@ func _ready() -> void:
 	
 	m_keepOnGround = false
 	warningSprite.visible = false
+	
+	hurtbox.connect("collision", self, "collision")
+	
+	healthBar.material.set_shader_param("u_lifePerc", PI)
+	
+func collision(data):
+	self.currentHp -= data["damage"]
 	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("test"):
@@ -181,17 +207,18 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 func _on_hit_box_area_entered(area: Area2D) -> void:
 #	hit player 
 #	print("hit player")
-	area.collision({
-		"damage": CHARGE_DAMAGE,
-		"from": "guillotine"
-	})
-	damageToPlayerThisCharge += CHARGE_DAMAGE
-	if damageToPlayerThisCharge > DAMAGE_TO_SPLIT:
-		splitPlayer()
+	if area is Hurtbox:
+		area.collision({
+			"damage": CHARGE_DAMAGE,
+			"from": "guillotine"
+		})
+		damageToPlayerThisCharge += CHARGE_DAMAGE
+		if damageToPlayerThisCharge > DAMAGE_TO_SPLIT:
+			splitPlayer()
 	
 func splitPlayer():
 	print("split player")
-	pass
+#	Globals.getSingle("player").spawnHalfPlayer = true
 	
 func onChargeNoDamage():
 	var angle = PI / 4.0

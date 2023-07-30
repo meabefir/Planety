@@ -60,5 +60,6 @@ func updateDirToPlayer(delta:float):
 	
 func _on_Area2D_area_entered(area: Area2D) -> void:
 	Globals.getSingle("player").spawnHalfPlayer = false
+	print("UPSSSSSS")
 	queue_free()
 

@@ -148,7 +148,8 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	if !canHit:
 		return
 	var player = area.get_parent()
-	player.collision({
-		"from": "enemy",
-		"damage": DAMAGE
-	})
+	if area is Hurtbox:
+		player.collision({
+			"from": "enemy",
+			"damage": DAMAGE
+		})
